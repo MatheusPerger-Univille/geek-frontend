@@ -1,1 +1,18 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.noty_bar .mrg5B {
+    border: 1px solid lightgray !important;
+}
+
+.noty_bar {
+    text-align: justify;
+}
+
+.noty_theme__bootstrap-v4.noty_type__alert {
+    background-color:  #fff;
+}
