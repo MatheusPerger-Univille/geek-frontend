@@ -12,3 +12,4 @@
  - DataTables ([Link para documentação](https://l-lin.github.io/angular-datatables/#/getting-starte))
  - jQuery 3.5.1 ([Link para documentação](https://api.jquery.com/))
  - Bootstrap 4.5 ([Link para documentação](https://getbootstrap.com/docs/4.0/getting-started))
+ 
