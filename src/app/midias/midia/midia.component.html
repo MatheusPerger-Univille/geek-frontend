@@ -1,0 +1,20 @@
+<form class="form-linha" [formGroup]="formGroup">
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Titulo</mat-label>
+        <input matInput formControlName="titulo">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Data lançamento</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dataLancamento" (click)="picker.open()">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Descrição</mat-label>
+        <textarea matInput [matAutosizeMinRows]="5" [mat-autosize]="true" formControlName="descricao"></textarea>
+    </mat-form-field>
+
+</form>

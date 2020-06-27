@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>{{ nomeImagem }}</h1>
+<hr>
+
+<div mat-dialog-content>
+    <div class="mb-3" *ngIf="hasPreview">
+        <img class="image-preview" [src]="previewUrl" />             
+    </div>
+
+    <div class="mb-3" *ngIf="showUrl">
+        <img class="image-preview" [src]="viewImagemModal.url" />             
+    </div>
+</div>
+
+<div class="justify-center" mat-dialog-actions>
+    <button class="btn btn-outline-danger button-form" (click)="onFechar()">Fechar</button>
+</div>

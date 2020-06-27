@@ -23,6 +23,8 @@ export class Paging {
 
     public sort: Sort[] = [];
 
+    public search: string;
+
     toString() {
 
         let sortStr = '';
@@ -38,6 +40,6 @@ export class Paging {
             });
         }
 
-        return `size=${this.size}&page=${this.page}${sortStr}`;
+        return `size=${this.size}&page=${this.page}&search=${this.search}${sortStr}`;
     }
 }

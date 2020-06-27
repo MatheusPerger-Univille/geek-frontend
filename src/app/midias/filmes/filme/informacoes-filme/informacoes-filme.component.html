@@ -1,0 +1,36 @@
+<form class="form-linha" [formGroup]="formGroup">
+    
+    <mat-form-field class="example-full-width">
+        <mat-label>Direção</mat-label>
+        <input matInput formControlName="direcao">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Elenco</mat-label>
+        <input matInput formControlName="elenco">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Nascionalidade</mat-label>
+        <input matInput formControlName="nascionalidade">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Duração</mat-label>
+        <input matInput formControlName="duracao">
+    </mat-form-field>
+
+    <div class="row col-8">
+        <mat-label>Faixa etaria: </mat-label>
+        <mat-radio-group formControlName="faixaEtaria"
+            class="radio-group-form">
+            <mat-radio-button [value]="faixaEtariaEnum.LIVRE">Livre</mat-radio-button>
+            <mat-radio-button [value]="faixaEtariaEnum.DEZ">10</mat-radio-button>
+            <mat-radio-button [value]="faixaEtariaEnum.DOZE">12</mat-radio-button>
+            <mat-radio-button [value]="faixaEtariaEnum.QUATORZE">14</mat-radio-button>
+            <mat-radio-button [value]="faixaEtariaEnum.DEZESSEIS">16</mat-radio-button>
+            <mat-radio-button [value]="faixaEtariaEnum.DEZOITO">18</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+</form>

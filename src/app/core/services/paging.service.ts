@@ -37,6 +37,8 @@ export class PagingService {
             p.size = data.length;
         }
 
+        p.search = data.search.value;
+
         return p;
 
     }

@@ -8,7 +8,7 @@ import { EntityBase } from '../models/entity-base.model';
 
 export abstract class ServiceBase<T> {
 
-    protected abstract readonly PATH: string;
+    protected abstract readonly API_PATH: string;
 
     constructor(protected httpClient: HttpClient) { }
 
@@ -18,7 +18,7 @@ export abstract class ServiceBase<T> {
 
     obterPorId(id: number): Observable<T> {
 
-        return this.httpClient.get<T>(`${this.PATH}/${id}`);
+        return this.httpClient.get<T>(`${this.API_PATH}/${id}`);
     }
 
 }

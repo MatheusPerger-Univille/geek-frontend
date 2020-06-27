@@ -19,6 +19,9 @@
         },
         "@schematics/angular:module": {
           "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
         }
       },
       "root": "",
@@ -40,25 +43,53 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/datatables.net-dt/css/jquery.dataTables.css",
-              "node_modules/datatables.net-buttons-dt/css/buttons.dataTables.css",
+              "node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css",
+              "node_modules/datatables.net-buttons-bs4/css/buttons.bootstrap4.css",
+              "node_modules/datatables.net-select-bs4/css/select.bootstrap4.css",
+              "node_modules/datatables.net-colreorder-bs4/css/colReorder.bootstrap4.css",
+              "node_modules/datatables.net-fixedheader-bs4/css/fixedHeader.bootstrap4.css",
+              "node_modules/datatables.net-fixedcolumns-bs4/css/fixedColumns.bootstrap4.css",
+              "node_modules/datatables.net-rowgroup-bs4/css/rowGroup.bootstrap4.css",
+              "node_modules/datatables.net-keytable-bs4/css/keyTable.bootstrap4.css",
+              "node_modules/datatables.net-rowreorder-bs4/css/rowReorder.bootstrap4.css",
+              "node_modules/datatables.net-responsive-bs4/css/responsive.bootstrap4.css",
+              "node_modules/datatables.net-searchpanes-bs4/css/searchPanes.bootstrap4.css",
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "node_modules/datatables.net-responsive-dt/css/responsive.dataTables.css",
-              "node_modules/datatables.net-select-dt/css/select.dataTables.css",
               "src/assets/elements/loading-indicators.css",
+              "src/assets/icons/fontawesome/css/all.min.css",
               "node_modules/noty/lib/noty.css",
               "src/styles.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/datatables.net/js/jquery.dataTables.js",
+              "node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js",
               "node_modules/datatables.net-buttons/js/dataTables.buttons.js",
+              "node_modules/datatables.net-buttons-bs4/js/buttons.bootstrap4.js",
+              "node_modules/datatables.net-fixedheader/js/dataTables.fixedHeader.js",
+              "node_modules/datatables.net-fixedheader-bs4/js/fixedHeader.bootstrap4.js",
+              "node_modules/datatables.net-select/js/dataTables.select.js",
+              "node_modules/datatables.net-select-bs4/js/select.bootstrap4.js",
+              "node_modules/datatables.net-fixedcolumns/js/dataTables.fixedColumns.js",
+              "node_modules/datatables.net-fixedcolumns-bs4/js/fixedColumns.bootstrap4.js",
+              "node_modules/datatables.net-colreorder/js/dataTables.colReorder.js",
+              "node_modules/datatables.net-colreorder-bs4/js/colReorder.bootstrap4.js",
+              "node_modules/datatables.net-keytable/js/dataTables.keyTable.js",
+              "node_modules/datatables.net-keytable-bs4/js/keyTable.bootstrap4.js",
+              "node_modules/datatables.net-rowgroup/js/dataTables.rowGroup.js",
+              "node_modules/datatables.net-rowgroup-bs4/js/rowGroup.bootstrap4.js",
+              "node_modules/datatables.net-rowreorder/js/dataTables.rowReorder.js",
+              "node_modules/datatables.net-rowreorder-bs4/js/rowReorder.bootstrap4.js",
+              "node_modules/datatables.net-searchpanes/js/dataTables.searchPanes.js",
+              "node_modules/datatables.net-searchpanes-bs4/js/searchPanes.bootstrap4.js",
               "node_modules/datatables.net-buttons/js/buttons.colVis.js",
               "node_modules/datatables.net-buttons/js/buttons.flash.js",
               "node_modules/datatables.net-buttons/js/buttons.html5.js",
               "node_modules/datatables.net-buttons/js/buttons.print.js",
               "node_modules/datatables.net-responsive/js/dataTables.responsive.js",
-              "node_modules/datatables.net-select/js/dataTables.select.js",
+              "node_modules/datatables.net-responsive-bs4/js/responsive.bootstrap4.js",
+              
               "node_modules/noty/lib/noty.js"
             ]
           },
@@ -124,10 +155,12 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/datatables.net-dt/css/jquery.dataTables.css",
+              "node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css",
               "node_modules/datatables.net-buttons-dt/css/buttons.dataTables.css",
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/datatables.net-responsive-dt/css/responsive.dataTables.css",
               "node_modules/datatables.net-select-dt/css/select.dataTables.css",
+              "node_modules/datatables.net-buttons-bs4/css/buttons.bootstrap4.css",
               "src/assets/elements/loading-indicators.css",
               "node_modules/noty/lib/noty.css",
               "src/styles.css"
@@ -135,6 +168,7 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/datatables.net/js/jquery.dataTables.js",
+              "node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js",
               "node_modules/datatables.net-buttons/js/dataTables.buttons.js",
               "node_modules/datatables.net-buttons/js/buttons.colVis.js",
               "node_modules/datatables.net-buttons/js/buttons.flash.js",
@@ -142,6 +176,7 @@
               "node_modules/datatables.net-buttons/js/buttons.print.js",
               "node_modules/datatables.net-responsive/js/dataTables.responsive.js",
               "node_modules/datatables.net-select/js/dataTables.select.js",
+              "node_modules/datatables.net-buttons-bs4/js/buttons.bootstrap4.js",
               "node_modules/noty/lib/noty.js"
             ]
           }

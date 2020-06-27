@@ -1,0 +1,64 @@
+.header {
+    height: 17%;
+    background-color: white;
+    z-index: 4;
+}
+
+.header-brand {
+    height: 90%;
+    padding-top: 3rem;
+    padding-left: 2.5rem;
+}
+
+.logo {
+    display:inline;
+    float: left;
+    height: 100%;
+    margin-left: 25px;
+    padding: 0px;
+}
+
+.logo-image {
+    max-width:100%;
+    max-height:100%;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+.header-filho {
+    float: left;
+}
+
+.search {
+    float: right;
+    margin-top: 12px;
+}
+
+.search > div {
+    margin-left: 5%;
+}
+
+.busca {
+    width: 80%;
+}
+
+.form {
+    float: right;
+}
+
+.navbar {
+    margin: .5rem 4rem;
+    background-color: #88BC75 !important;
+}
+
+.dropdown-toggle::after {
+    content: none !important;
+}
+
+.dropdown:hover {
+    background-color: #259A00 !important;
+}
+
+.dropdown:hover > .dropdown-menu {
+    display: block !important;
+}

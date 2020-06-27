@@ -1,0 +1,11 @@
+<div id="page-title" class="row text-center pb-3 col-12">
+    <div class="col-md-1" *ngIf="showBackButton">
+        <button type="button" class="btn btn-round btn-default back-button" (click)="onBackButton()" container="body">
+            <i class="fa fa-arrow-left"></i>
+        </button>
+    </div>
+    <div class="col-md-10" [ngClass]="{'offset-1': !showBackButton}">
+        <mat-card-title>{{ title }}</mat-card-title>
+        <mat-card-subtitle>{{ subtitle }}</mat-card-subtitle>
+    </div>
+</div>

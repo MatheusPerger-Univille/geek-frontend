@@ -5,37 +5,31 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatToolbarModule } from '@angular/material/toolbar';
-
-import { MatSidenavModule } from  '@angular/material/sidenav';
-import { MatCardModule } from  '@angular/material/card';
-import { MatListModule } from '@angular/material/list';
-import { MatButtonModule } from  '@angular/material/button';
-import { MatSnackBarModule } from  '@angular/material/snack-bar';
-import { HttpClientModule } from  '@angular/common/http';
-
-import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatTableModule } from '@angular/material/table';
 import { BlockUIModule } from 'ng-block-ui';
 import { BlockUIComponent } from './core/components/blockui.component';
-import { DataTablesModule } from 'angular-datatables';
 
-import localePt from '@angular/common/locales/pt';
-import { registerLocaleData } from  '@angular/common';
 import { PagingService } from './core/services/paging.service';
 import { DataUtils } from './core/utils/data-utils';
 import { NotificationService } from './core/components/shared/notification/notification.service';
 
 import * as $ from 'jquery';
 import { NotificationPipe } from './core/components/shared/notification/notification-pipe';
+import { HeaderComponent } from './core/components/shared/header/header.component';
+import { HomeComponent } from './home/home.component';
+import { SharedModule } from './core/components/shared/shared-module.module';
+
+import { registerLocaleData } from '@angular/common';
+import localePtBr from '@angular/common/locales/pt';
+
+registerLocaleData(localePtBr, 'pt');
 
 @NgModule({
   declarations: [
     AppComponent,
     BlockUIComponent,
-    NotificationPipe
+    NotificationPipe,
+    HeaderComponent,
+    HomeComponent
   ],
   entryComponents: [
     BlockUIComponent,
@@ -48,29 +42,16 @@ import { NotificationPipe } from './core/components/shared/notification/notifica
       template: BlockUIComponent,
       message: 'Carregando...',
     }),
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    MatCardModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    HttpClientModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    DataTablesModule
+    SharedModule
   ],
   providers: [
     DataUtils,
     PagingService,
     NotificationService,
-    {
-    provide: LOCALE_ID,
-    useValue: 'pt-BR'
-  }],
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
+  ],
   exports: [
-    NotificationPipe
+    NotificationPipe,
   ],
   bootstrap: [AppComponent]
 })
