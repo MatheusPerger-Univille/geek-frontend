@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { PageTitleComponent } from './page-title/page-title.component';
 import { AbstractComponentComponent } from './abstract-component/abstract-component.component';
+import { DevTestesComponent } from './dev-testes/dev-testes.component';
 
 const MODULES = [
   CommonModule,
@@ -43,7 +44,8 @@ const MODULES = [
     ImagemCapaComponent,
     ViewImageModalComponent,
     PageTitleComponent,
-    AbstractComponentComponent
+    AbstractComponentComponent,
+    DevTestesComponent
   ],
   imports: [
     ...MODULES
