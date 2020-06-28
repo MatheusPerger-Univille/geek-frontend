@@ -1,7 +1,8 @@
+/* MENU */
 .header {
     position: fixed;
     top: 0;
-    height: 130px;
+    height: 120px;
     width: 100%;
     background-color: white;
     z-index: 149;
@@ -9,6 +10,10 @@
 
 .header-left {
     padding: 20px 40px;
+}
+
+.header-button {
+    border-radius: 20px;
 }
 
 .logo-image {
@@ -23,12 +28,18 @@
 
 .input-search {
     width: 80%;
+    border-radius: 18px;
+}
+
+.nav-menu {
+    width: 100%;
+    padding: 130px 0 0 0;
 }
 
 @media (max-width: 779.98px) { 
     
     .header {
-        height: 150px;
+        height: 140px;
         float: none;
     }
 
@@ -52,9 +63,18 @@
     .form-header {
         justify-content: center;
     }
+
+    .nav-menu {
+        width: 100%;
+        padding: 142px 0 0 0;
+    }
 }
 
 @media (min-width: 779.99px) and (max-width: 991.98px) { 
+
+    .header {
+        height: 100px;
+    }
 
     .header-left {
         float: left;
@@ -72,9 +92,17 @@
         float: right;
         padding: 20px 20px;
     }
+
+    .nav-menu {
+        padding: 101px 0 0 0;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1199.98px) { 
+
+    .header {
+        height: 100px;
+    }
 
     .header-left {
         float: left;
@@ -87,6 +115,10 @@
     .header-right {
         float: right;
         padding: 25px 20px;
+    }
+
+    .nav-menu {
+        padding: 101px 0 0 0;
     }
 }
 
