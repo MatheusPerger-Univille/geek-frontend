@@ -1,64 +1,107 @@
 .header {
-    height: 17%;
+    position: fixed;
+    top: 0;
+    height: 130px;
+    width: 100%;
     background-color: white;
-    z-index: 4;
+    z-index: 149;
 }
 
-.header-brand {
-    height: 90%;
-    padding-top: 3rem;
-    padding-left: 2.5rem;
-}
-
-.logo {
-    display:inline;
-    float: left;
-    height: 100%;
-    margin-left: 25px;
-    padding: 0px;
+.header-left {
+    padding: 20px 40px;
 }
 
 .logo-image {
-    max-width:100%;
-    max-height:100%;
-    margin-left: 0px;
-    padding-left: 0px;
+    max-width: 600px;
 }
 
-.header-filho {
-    float: left;
+.header-right {
+    display: inline;
+    margin: 7px 10px 0 0;
+    padding: 40px 20px;
 }
 
-.search {
-    float: right;
-    margin-top: 12px;
-}
-
-.search > div {
-    margin-left: 5%;
-}
-
-.busca {
+.input-search {
     width: 80%;
 }
 
-.form {
-    float: right;
+@media (max-width: 779.98px) { 
+    
+    .header {
+        height: 150px;
+        float: none;
+    }
+
+    .header-left {
+        text-align: center;
+        padding: 20px 40px;
+    }
+
+    .header-right {
+        padding: 0;
+    }
+
+    .logo-image {
+        max-width: 250px;
+    }
+
+    .input-search {
+        width: 70%;
+    }
+
+    .form-header {
+        justify-content: center;
+    }
 }
 
-.navbar {
-    margin: .5rem 4rem;
-    background-color: #88BC75 !important;
+@media (min-width: 779.99px) and (max-width: 991.98px) { 
+
+    .header-left {
+        float: left;
+    }
+
+    .logo-image {
+        max-width: 300px;
+    }
+
+    .input-search {
+        width: 70%;
+    }
+
+    .header-right {
+        float: right;
+        padding: 20px 20px;
+    }
 }
 
-.dropdown-toggle::after {
-    content: none !important;
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+
+    .header-left {
+        float: left;
+    }
+
+    .logo-image {
+        max-width: 350px;
+    }
+
+    .header-right {
+        float: right;
+        padding: 25px 20px;
+    }
 }
 
-.dropdown:hover {
-    background-color: #259A00 !important;
-}
+@media (min-width: 1200px) {
 
-.dropdown:hover > .dropdown-menu {
-    display: block !important;
+    .header-left {
+        float: left;
+    }
+
+    .logo-image {
+        max-width: 450px;
+    }
+
+    .header-right {
+        float: right;
+        padding: 35px 20px;
+    }
 }

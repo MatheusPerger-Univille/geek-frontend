@@ -1,46 +1,19 @@
-<div class="header">
-    <div class="header-brand col-12">
-        <div class="logo col-sm-12 col-md-4 col-lg-3 col-xl-3">
-            <a class="header-filho" [routerLink]="['']">
-                <img src="https://curso-spring-matheusp.s3-sa-east-1.amazonaws.com/GeekReviews.png" class="logo-image">
-            </a>
-        </div>
+<div class="header header-bg-gradient">
+	<div class="header-left">
+		<a [routerLink]="['']">
+			<img src="https://curso-spring-matheusp.s3-sa-east-1.amazonaws.com/GeekReviews.png" class="logo-image">
+		</a>
+	</div>
 
-        <div class="search col-sm-12 col-md-8 col-lg-8 col-xl-8">
-            <div>
-                <form class="form-inline form col-9">
-                    <input class="form-control mr-sm-2 busca" type="search" placeholder="Digite alguma coisa..."
-                        aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-success" type="button"><i class="fa fa-search"></i></button>
-                            <button class="btn btn-outline-success" type="button" (click)="onMidias()"><i class="fa fa-cog"></i></button>
-                        </div>
-                </form>
-            </div>
-        </div>
-
-    </div>
+	<div class="header-right col-5 col-sm-12 col-md-6">
+			<div>
+				<div class="form-inline form-header">
+					<input class="form-control mr-sm-2 input-search" type="search" placeholder="Pesquisa por título..." aria-label="Search">
+					<div class="input-group-append">
+							<button class="btn btn-outline-success header-button" type="button"><i class="fa fa-search"></i></button>
+							<button class="btn btn-outline-success header-button" type="button" (click)="onMidias()"><i class="fa fa-cog"></i></button>
+					</div>
+				</div>
+			</div>
+	</div>
 </div>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item" *ngIf="false">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown link
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-</nav>
-
-
-<br>
