@@ -19,6 +19,7 @@
 .menu ul li {
     width: 25%;
     float: left;
+    border-right: solid 1px #fff;
 }
 
 .menu a {
@@ -41,7 +42,7 @@
 }
 
 .menu a:hover {
-    background-color: #034c13ad !important;
+    background-color: #00901f !important;
     color: #fff;
     cursor: pointer;
 }
@@ -52,11 +53,11 @@
 }
 
 .menu ul ul li a {
-    background-color: #095a1bd1;
+    background-color: #095a1b;
 }
 
 label[for="bt_menu"] {
-    padding: 12px;
+    padding: 15px;
     background-color: #28a745;
     color: #fff;
     text-align: center;

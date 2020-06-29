@@ -104,10 +104,6 @@ table.datatable thead {
     color: white;
 }
 
-table {
-    border-radius: 30px;
-}
-
 .datatable-buttons {
     padding-bottom: 1rem;
 }
