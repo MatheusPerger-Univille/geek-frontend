@@ -20,6 +20,7 @@ import { SharedModule } from './core/components/shared/shared-module.module';
 
 import { registerLocaleData } from '@angular/common';
 import localePtBr from '@angular/common/locales/pt';
+import { NavMenuComponent } from './core/components/shared/nav-menu/nav-menu.component';
 
 registerLocaleData(localePtBr, 'pt');
 
@@ -29,7 +30,8 @@ registerLocaleData(localePtBr, 'pt');
     BlockUIComponent,
     NotificationPipe,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    NavMenuComponent
   ],
   entryComponents: [
     BlockUIComponent,

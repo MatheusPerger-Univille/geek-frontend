@@ -1,0 +1,121 @@
+/* navbar menu */
+*{
+    margin: 0 0 0 0;
+    padding: 0;
+    z-index: 149;
+}
+
+.menu {
+    width: 100%;
+    height: 50px;
+    background-color: #28a745;
+}
+
+.menu ul {
+    list-style: none;
+    position: relative;
+}
+
+.menu ul li {
+    width: 25%;
+    float: left;
+    border-right: solid 1px #fff;
+}
+
+.menu a {
+    padding: 15px;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    background-color: #28a745;
+    color: #fff;
+}
+
+.menu ul ul {
+    position: fixed;
+    visibility: hidden;
+    width: 100%;
+}
+
+.menu ul li:hover ul {
+    visibility: visible;
+}
+
+.menu a:hover {
+    background-color: #00901f !important;
+    color: #fff;
+    cursor: pointer;
+}
+
+.menu ul ul li {
+    float: none;
+    border-bottom: solid 1px #ccc;
+}
+
+.menu ul ul li a {
+    background-color: #095a1b;
+}
+
+label[for="bt_menu"] {
+    padding: 15px;
+    background-color: #28a745;
+    color: #fff;
+    text-align: center;
+    font-size: 30px;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+}
+
+#bt_menu {
+    display: none;
+}
+
+label[for="bt_menu"] {
+    display: none;
+}
+
+.nav-menu {
+    display: block;
+}
+
+@media(max-width: 800px) {
+
+    label[for="bt_menu"]{
+        display: block;
+    }
+
+    #bt_menu:checked ~ .menu {
+        margin-left: 0;
+    }
+
+    .menu{
+        margin-top: 5px;
+        margin-left: -100%;
+        transition:  all .4s;
+    }
+
+    .menu ul li{
+        width: 100%;
+        float: none;
+    }
+
+    .menu ul ul{
+        position: static;
+        overflow: hidden;
+        max-height: 0;
+        transition: all .4s;
+    }
+
+    .menu ul li:hover ul{
+        height: auto;
+        max-height: 200px;
+    }
+
+    .nav-menu {
+        display: block;
+        width: 100%;
+        height: 50px;
+        background-color: #28a745;
+    }
+}
