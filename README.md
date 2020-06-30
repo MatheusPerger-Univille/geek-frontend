@@ -1,6 +1,6 @@
-![](./src/assets/images/GeekReviews.png =400x) 
+<img src="https://github.com/MatheusPerger-Univille/geek-frontend/blob/master/src/assets/images/GeekReviews.png" width="500">
 
-___  
+______
 
 ## Projeto frontend
 
