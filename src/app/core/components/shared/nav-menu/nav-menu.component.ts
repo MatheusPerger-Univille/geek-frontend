@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoriasConfig } from 'src/app/core/configs/categorias.configs';
 
 @Component({
   selector: 'app-nav-menu',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavMenuComponent implements OnInit {
 
-  constructor() { }
+	listCategoriasFilmes = CategoriasConfig.FILMES;
 
-  ngOnInit(): void {
-  }
+	listCategoriasSeries = CategoriasConfig.SERIES;
+
+	listCategoriasGames  = CategoriasConfig.GAMES;
+
+	listCategoriasLivros = CategoriasConfig.LIVROS;
+
+    constructor() {
+	}
+
+    ngOnInit(): void {
+	}
 
 }

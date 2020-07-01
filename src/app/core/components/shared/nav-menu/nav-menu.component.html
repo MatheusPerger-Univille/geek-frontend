@@ -5,65 +5,43 @@
     <nav class="menu">
         <ul>
             <li><a>Filmes</a>
+
                 <ul>
-                    <li>
-                        <a>Ação</a>
-                    </li>
-                    <li>
-                        <a>Ficção</a>
-                    </li>
-                    <li>
-                        <a>Terror</a>
-                    </li>
-                    <li>
-                        <a>Suspense</a>
+                    <li *ngFor="let categoria of listCategoriasFilmes">
+                        <a [routerLink]="['filmes/categoria', categoria.value]">{{ categoria.descricao }}</a>
                     </li>
                 </ul>
+                
             </li>
+
             <li><a>Games</a>
+
                 <ul>
-                    <li>
-                        <a>PS4</a>
-                    </li>
-                    <li>
-                        <a>XBOX ONE</a>
-                    </li>
-                    <li>
-                        <a>Nintendo switch</a>
+                    <li *ngFor="let categoria of listCategoriasGames">
+                        <a [routerLink]="['games/categoria', categoria.value]">{{ categoria.descricao }}</a>
                     </li>
                 </ul>
+
             </li>
+
             <li><a>Livros</a>
+
                 <ul>
-                    <li>
-                        <a>Ficção</a>
-                    </li>
-                    <li>
-                        <a>Terror</a>
-                    </li>
-                    <li>
-                        <a>Suspense</a>
-                    </li>
-                    <li>
-                        <a>Românce</a>
+                    <li *ngFor="let categoria of listCategoriasLivros">
+                        <a [routerLink]="['livros/categoria', categoria.value]">{{ categoria.descricao }}</a>
                     </li>
                 </ul>
+
             </li>
+
             <li><a>Séries</a>
+
                 <ul>
-                    <li>
-                        <a>Ação</a>
-                    </li>
-                    <li>
-                        <a>Ficção</a>
-                    </li>
-                    <li>
-                        <a>Terror</a>
-                    </li>
-                    <li>
-                        <a>Suspense</a>
+                    <li *ngFor="let categoria of listCategoriasSeries">
+                        <a [routerLink]="['series/categoria', categoria.value]">{{ categoria.descricao }}</a>
                     </li>
                 </ul>
+
             </li>
         </ul>
     </nav>

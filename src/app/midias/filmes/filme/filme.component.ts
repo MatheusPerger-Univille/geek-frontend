@@ -45,13 +45,14 @@ export class FilmeComponent extends AbstractComponentComponent implements OnInit
 		nascionalidade: 'EUA',
 		duracao: '2h 36m',
 		faixaEtaria: FaixaEtaria.QUATORZE,
+		categorias: ["acao", "terror", "drama"]
 	};
 
 	constructor(private router: Router,
 		private route: ActivatedRoute,
 		private filmesService: FilmesService
 	) { 
-        super();
+		super(TipoMidia.FILME);
     }
 
 	ngOnInit(): void {
@@ -102,7 +103,8 @@ export class FilmeComponent extends AbstractComponentComponent implements OnInit
 				dataLancamento: value.dataLancamento,
 				tipo: TipoMidia.FILME,
 				titulo: value.titulo,
-				descricao: value.descricao
+				descricao: value.descricao,
+				categorias: value.categorias,
 			}
 		}
 	}

@@ -17,4 +17,11 @@
         <textarea matInput [matAutosizeMinRows]="5" [mat-autosize]="true" formControlName="descricao"></textarea>
     </mat-form-field>
 
+    <mat-form-field>
+        <mat-label>Categorias</mat-label>
+        <mat-select formControlName="categorias" multiple>
+          <mat-option *ngFor="let categoria of listCategorias" [value]="categoria.value">{{categoria.descricao}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
 </form>

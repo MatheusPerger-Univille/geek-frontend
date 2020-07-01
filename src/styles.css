@@ -107,3 +107,11 @@ table.datatable thead {
 .datatable-buttons {
     padding-bottom: 1rem;
 }
+
+.mat-primary .mat-pseudo-checkbox-checked {
+    background: green;
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: black;
+}

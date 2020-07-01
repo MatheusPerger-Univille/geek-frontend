@@ -15,4 +15,6 @@ export class Midia extends AbstractModel {
 
     public titulo: string;
 
+    public categorias: string[];
+
 }

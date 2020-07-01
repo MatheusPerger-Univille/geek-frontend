@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DataTablesModule } from 'angular-datatables';
 import { MatStepperModule } from '@angular/material/stepper';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MidiaComponent } from '../../../midias/midia/midia.component';
 import { ImagemCapaComponent } from './upload-image/imagem-capa.component';
@@ -19,6 +19,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { PageTitleComponent } from './page-title/page-title.component';
 import { AbstractComponentComponent } from './abstract-component/abstract-component.component';
 import { DevTestesComponent } from './dev-testes/dev-testes.component';
+import {MatSelectModule} from '@angular/material/select';
 
 const MODULES = [
   CommonModule,
@@ -35,7 +36,8 @@ const MODULES = [
   HttpClientModule,
   MatDialogModule,
   MatIconModule,
-  MatRadioModule
+  MatRadioModule,
+  MatSelectModule
 ]
 
 @NgModule({
