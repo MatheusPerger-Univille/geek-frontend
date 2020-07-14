@@ -14,7 +14,7 @@ import { FilmesPesquisa } from './filmes-pesquisa.model';
 })
 export class FilmesService extends ServiceBase<Filme> {
 
-  protected API_PATH = '/api/filmes';
+  protected API_PATH = API_CONFIG.baseUrl + '/api/filmes';
 
   constructor(protected httpClient: HttpClient) {
     super(httpClient);
@@ -25,12 +25,11 @@ export class FilmesService extends ServiceBase<Filme> {
     if (!paginacao) {
       paginacao = new Paging();
     }
-console.log('aaa');
+
     return this.httpClient.get<EntityBase<FilmesPesquisa>>(`${this.API_PATH}/filtrar?${paginacao.toString()}`)
   }
 
   salvar(value: Filme): Observable<any> {
-    // FALTA IMPLEMENTAR BACKEND
 
     if (value.id) {
       return this.httpClient.put(`${this.API_PATH}`, value);

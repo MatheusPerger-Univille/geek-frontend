@@ -23,7 +23,7 @@ export class AbstractComponentComponent implements OnInit {
         this.midia = {
             ...new Midia(),
             id: values.id,
-            dataLancamento: values.dataLancamento,
+            dataLancamento: new Date(values.dataLancamento) || new Date(),
             tipo: values.tipo,
             descricao: values.descricao,
             urlCapa: values.urlCapa,

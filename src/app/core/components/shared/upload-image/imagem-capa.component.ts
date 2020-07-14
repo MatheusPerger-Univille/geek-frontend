@@ -25,8 +25,7 @@ export class ImagemCapaComponent implements OnInit {
   @Input()
   set objetoUrl(value: any) {
 
-    if (value && value.urlCapa !== this.urlImagem) {
-      console.log('ACIONOU 3');
+    if (value && value.urlCapa != null && value.urlCapa !== this.urlImagem) {
       this.urlImagem = value.urlCapa;
       this.nomeArquivo = this.urlImagem.split('/').slice(-1).pop();
     }

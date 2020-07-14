@@ -15,3 +15,8 @@ ______
 - jQuery 3.5.1 ([Link para documentação](https://api.jquery.com/))
 
 - Bootstrap 4.5 ([Link para documentação](https://getbootstrap.com/docs/4.0/getting-started))
+
+
+---
+
+[Link repositório backend](https://github.com/MatheusPerger-Univille/geek-backend)

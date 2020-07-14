@@ -100,7 +100,7 @@ export class MidiaComponent implements OnInit {
 	private setarValores(): Midia {
 
 		const formValues = this.formGroup.getRawValue();
-		console.log(formValues);
+
 		const midia = {
 			...new Midia(),
 			id: formValues.id,
@@ -121,7 +121,7 @@ export class MidiaComponent implements OnInit {
 
         this.formGroup.patchValue({
             titulo: this.midia.titulo,
-            dataLancamento: new Date(this.midia.titulo),
+            dataLancamento: new Date(this.midia.dataLancamento),
             descricao: this.midia.descricao,
             categorias: this.midia.categorias
 		});

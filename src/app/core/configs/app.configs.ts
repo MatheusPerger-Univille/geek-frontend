@@ -6,6 +6,7 @@ export class AppConfig {
 
     // https://datatables.net/reference/option/dom
     static TABLE_DOM_BUTTONS = '<"row"<"col-sm-12 table-buttons"B>>rt';
+    static TABLE_RESULTS_SEARCH = '<"row"<"col-sm-12 datatable-buttons text-right"B>> <"row"<"col-sm-6"l><"col-sm-6 pull-right"f>> rt<"row"<"col-sm-6"i><"col-sm-6 pull-right"p>>';
     static TABLE_DOM_BUTTONS_LENGTHMENU_SEARCH = '<"row"<"col-sm-12 table-buttons"B>><"row"<"col-sm-6"l><"col-sm-6 pull-right"f>>rt<"row"<"col-sm-6"i><"col-sm-6 pull-right"p>>';
     static TABLE_DOM_BUTTONS_SEARCH = '<"row"<"col-sm-6 table-buttons"B><"col-sm-6 pull-right"f>>rt<"row"<"col-sm-6"i><"col-sm-6 pull-right"p>>';
     static TABLE_DOM_BUTTONS_LENGTHMENU = '<"row"<"col-sm-6 table-buttons"B><"col-sm-6 pull-right-length-menu"l>>rt<"row"<"col-sm-6"i><"col-sm-6 pull-right"p>>';

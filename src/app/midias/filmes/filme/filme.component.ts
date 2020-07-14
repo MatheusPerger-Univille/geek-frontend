@@ -8,7 +8,6 @@ import { FilmesService } from '../filmes.service';
 import { NotificationService } from 'src/app/core/components/shared/notification/notification.service';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { TipoMidia } from 'src/app/core/models/enums/tipo-midia.enum';
-import { FaixaEtaria } from '../../faixaEtaria.enum';
 import { AbstractComponentComponent } from 'src/app/core/components/shared/abstract-component/abstract-component.component';
 
 @Component({
@@ -33,21 +32,6 @@ export class FilmeComponent extends AbstractComponentComponent implements OnInit
 	
 	isEdicao = false;
 
-	filmeTesteEdicao = {... new Filme(),
-		id: 1,
-		dataLancamento: new Date(),
-		tipo: TipoMidia.FILME,
-		descricao: 'Velozes é muito bom...',
-		urlCapa: 'https://curso-spring-matheusp.s3-sa-east-1.amazonaws.com/GeekReviews.png',
-		titulo: 'Velozes e Furiosos 8',
-		direcao: 'Alguem',
-		elenco: 'Vin Diesel',
-		nascionalidade: 'EUA',
-		duracao: '2h 36m',
-		faixaEtaria: FaixaEtaria.QUATORZE,
-		categorias: ["acao", "terror", "drama"]
-	};
-
 	constructor(private router: Router,
 		private route: ActivatedRoute,
 		private filmesService: FilmesService
@@ -70,9 +54,8 @@ export class FilmeComponent extends AbstractComponentComponent implements OnInit
 		this.filmesService.obterPorId(id).subscribe(result => {
 			this.setarValoresEdicao(result);
 		}, error => {
-			NotificationService.error(`Ocorreu um erro ao recuperar o filme.`);
-            // this.irParaListagem();
-            this.setarValoresEdicao(this.filmeTesteEdicao); // RETIRAR APÓS IMPLEMENTAR BACKEND
+			NotificationService.error(`Ocorreu um erro ao recuperar o filme: ${error.error.message}`);
+        	this.irParaListagem();
 		});
 	}
 
@@ -138,16 +121,14 @@ export class FilmeComponent extends AbstractComponentComponent implements OnInit
 	}
 
 	onComplete() {
-		console.log('finalizado');
-		console.log(this.filme);
 		this.blockUI.start();
 
 		this.filmesService.salvar(this.filme).subscribe(result => {
-			NotificationService.success(`Filme ${this.filme.titulo.toUpperCase} salvo com sucesso.`);
+			NotificationService.success(`Filme ${this.filme.titulo.toUpperCase()} salvo com sucesso.`);
 			this.blockUI.stop();
 			this.irParaListagem();
 		}, error => {
-			NotificationService.error(`Ocorreu uma falha ao tentar salvar o filme. ${error.message}`);
+			NotificationService.error(`Ocorreu uma falha ao tentar salvar o filme. ${error.error.message}`);
 			this.blockUI.stop();
 		});
 	}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Paging } from '../../core/models/paging.model';
 import { Router } from '@angular/router';
 import { PagingService } from '../../core/services/paging.service';
@@ -10,6 +10,7 @@ import { AppConfig } from '../../core/configs/app.configs';
 import { FilmesPesquisa } from './filmes-pesquisa.model';
 import { NotificationService } from 'src/app/core/components/shared/notification/notification.service';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
 	selector: 'app-filmes',
@@ -19,22 +20,22 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
 export class FilmesComponent implements OnInit {
 
 	@BlockUI() 
-  	blockUI: NgBlockUI;
+	  blockUI: NgBlockUI;
+	  
+	@ViewChild(DataTableDirective, { static: false })
+    dtElement: DataTableDirective;
 
 	filmes: FilmesPesquisa[];
 	paginacao: Paging;
 	dtOptions: any = {};
 	ordenacao = [[1, 'desc']];
-
-	teste: FilmesPesquisa[] = [
-		{id: 1, dataLancamento: new Date(), titulo: 'Velozes 8'},
-		{id: 2, dataLancamento: new Date(), titulo: 'Velozes 7'},
-		{id: 3, dataLancamento: new Date(), titulo: 'Velozes 6'},
-	]
+	nenhumRegistro = true;
 
 	colunas = [
-		{ data: 'nome', orderable: true },
-		{ data: 'data', orderable: true }
+		{ data: 'id', orderable: true },
+		{ data: 'titulo', orderable: true },
+		{ data: 'dataLancamento', orderable: true },
+		{ data: '', orderable: false },
 	];
 
 	constructor(
@@ -56,7 +57,7 @@ export class FilmesComponent implements OnInit {
 			language: {
 				url: AppConfig.DATATABLE_LANGUAGE,
 			},
-			dom: '<"row"<"col-sm-12 datatable-buttons text-right"B>> <"row"<"col-sm-6"l><"col-sm-6 pull-right"f>> rt<"row"<"col-sm-6"i><"col-sm-6 pull-right"p>>',
+			dom: AppConfig.TABLE_RESULTS_SEARCH,
 			ajax: (data, callback) => {
 
 				const p = this.paginacao ? this.paginacao : this.pgService.build(data, this.colunas);
@@ -70,19 +71,15 @@ export class FilmesComponent implements OnInit {
 
 					this.filmes = f.content;
 
+					this.nenhumRegistro = this.filmes.length === 0;
+
 					callback({
 						rerecordsTotal: f.totalElements,
 						recordsFiltered: f.totalElements,
 						data: []
 					});
-				}, error => { // RETIRAR APÓS BACKEND
-					this.filmes = this.teste;
-
-					callback({
-						rerecordsTotal: 3,
-						recordsFiltered: 3,
-						data: []
-					});
+				}, error => {
+					NotificationService.error('Ocorreu um erro ao recuperar os dados.');
 				});
 			},
 			columns: this.colunas,
@@ -127,9 +124,18 @@ export class FilmesComponent implements OnInit {
 	
 		NotificationService.confirm(`Deseja continuar a exclusão de ${filme.titulo}?`, () => {
 			this.excluirRegistro(filme.id);
+			this.reloadDataTable();
+		}, error => {
+			NotificationService.error('Ocorreu um erro ao tentar excluir o filme.');
 		});
 		
 	}
+
+	reloadDataTable() {
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.ajax.reload();
+        });
+    }
 
 	private excluirRegistro(id: number) {
 		this.blockUI.start();
