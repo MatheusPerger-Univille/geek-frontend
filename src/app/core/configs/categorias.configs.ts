@@ -1,42 +1,42 @@
 export class CategoriasModelo {
 
-    public value: string;
+    public value: number;
     public descricao: string;
 }
 
 export class CategoriasConfig {
 
     static GAMES = [
-        {value: 'ps4', descricao: 'PS4'},
-        {value: 'xbox-one', descricao: 'XBOX ONE'},
-        {value: 'switch', descricao: 'Nintendo switch'}
+        {value: 1, descricao: 'PS4'},
+        {value: 2, descricao: 'XBOX ONE'},
+        {value: 3, descricao: 'Nintendo switch'}
     ];
 
     static FILMES = [
-        {value: 'aventura', descricao: 'Aventura'},
-        {value: 'acao', descricao: 'Ação'},
-        {value: 'suspense', descricao: 'Suspense'},
-        {value: 'terror', descricao: 'Terror'},
-        {value: 'drama', descricao: 'Drama'},
-        {value: 'romance', descricao: 'Romance'}
+        {value: 4, descricao: 'Aventura'},
+        {value: 5, descricao: 'Ação'},
+        {value: 6, descricao: 'Suspense'},
+        {value: 7, descricao: 'Terror'},
+        {value: 8, descricao: 'Drama'},
+        {value: 9, descricao: 'Romance'}
     ];
 
     static SERIES = [
-        {value: 'aventura', descricao: 'Aventura'},
-        {value: 'acao', descricao: 'Ação'},
-        {value: 'suspense', descricao: 'Suspense'},
-        {value: 'terror', descricao: 'Terror'},
-        {value: 'drama', descricao: 'Drama'},
-        {value: 'romance', descricao: 'Romance'}
+        {value: 4, descricao: 'Aventura'},
+        {value: 5, descricao: 'Ação'},
+        {value: 6, descricao: 'Suspense'},
+        {value: 7, descricao: 'Terror'},
+        {value: 8, descricao: 'Drama'},
+        {value: 9, descricao: 'Romance'}
     ];
 
     static LIVROS = [
-        {value: 'computacao', descricao: 'Computação'},
-        {value: 'fantasia', descricao: 'Fantasia'},
-        {value: 'horror', descricao: 'Horror'},
-        {value: 'ficcao', descricao: 'Ficção'},
-        {value: 'romance', descricao: 'Romance'},
-        {value: 'suspense', descricao: 'Suspense'}
+        {value: 10, descricao: 'Computação'},
+        {value: 11, descricao: 'Fantasia'},
+        {value: 12, descricao: 'Horror'},
+        {value: 13, descricao: 'Ficção'},
+        {value: 9, descricao: 'Romance'},
+        {value: 6, descricao: 'Suspense'}
     ];
 
 };
