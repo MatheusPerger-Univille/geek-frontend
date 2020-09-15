@@ -4,6 +4,7 @@ import { Midia } from '../midia.model';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { CategoriasModelo, CategoriasConfig } from 'src/app/core/configs/categorias.configs';
 import { TipoMidia } from 'src/app/core/models/enums/tipo-midia.enum';
+import { Categoria } from 'src/app/core/models/categoria.model';
 
 @Component({
 	selector: 'app-midia',
@@ -107,7 +108,12 @@ export class MidiaComponent implements OnInit {
 			titulo: formValues.titulo,
 			descricao: formValues.descricao,
 			dataLancamento: formValues.dataLancamento,
-			categorias: formValues.categorias
+			categorias: formValues.categorias.map(r => {
+				return {
+					... new Categoria(),
+					id: r
+				};
+			})
 		}
 
 		return midia;
