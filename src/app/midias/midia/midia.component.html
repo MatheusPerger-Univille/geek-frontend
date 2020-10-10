@@ -20,7 +20,7 @@
     <mat-form-field>
         <mat-label>Categorias</mat-label>
         <mat-select formControlName="categorias" multiple>
-          <mat-option *ngFor="let categoria of listCategorias" [value]="categoria.value">{{categoria.descricao}}</mat-option>
+            <mat-option *ngFor="let categoria of listCategorias" [value]="categoria">{{categoria.descricao}}</mat-option>
         </mat-select>
     </mat-form-field>
 
