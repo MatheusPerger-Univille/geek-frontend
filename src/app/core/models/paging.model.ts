@@ -40,6 +40,6 @@ export class Paging {
             });
         }
 
-        return `size=${this.size}&page=${this.page}&search=${this.search}${sortStr}`;
+        return `size=${this.size}&page=${this.page}${sortStr}`;
     }
 }

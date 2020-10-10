@@ -69,7 +69,6 @@ export class MidiaComponent implements OnInit {
 	ngOnInit(): void {
 
 		this.createForm();
-		
 	}
 
 	private createForm() {

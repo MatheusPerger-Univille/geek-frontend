@@ -26,7 +26,7 @@ export class FilmesService extends ServiceBase<Filme> {
       paginacao = new Paging();
     }
 
-    return this.httpClient.get<EntityBase<FilmesPesquisa>>(`${this.API_PATH}/filtrar?${paginacao.toString()}`)
+    return this.httpClient.get<EntityBase<FilmesPesquisa>>(`${this.API_PATH}/filtrar?search=${paginacao.search}&${paginacao.toString()}`)
   }
 
   salvar(value: Filme): Observable<any> {
