@@ -22,6 +22,10 @@ export class MidiaComponent implements OnInit {
 
 	isDeveEditar = true;
 
+	compareFn(f1: any, f2: any): boolean{
+		return f1.id == f2.id;
+	}
+
 	get listCategorias(): CategoriasModelo[] {
 
 		if (!this.midia) {
@@ -62,7 +66,7 @@ export class MidiaComponent implements OnInit {
     
     get isEdicao(): boolean {
         return this.midia && this.midia.id !== undefined;
-    }
+	}
 
 	constructor(private _formBuilder: FormBuilder) { }
 
@@ -103,14 +107,14 @@ export class MidiaComponent implements OnInit {
 
 		const midia = {
 			...new Midia(),
-			id: formValues.id,
+			id: this.isEdicao ? this.midia.id : undefined,
 			titulo: formValues.titulo,
 			descricao: formValues.descricao,
 			dataLancamento: formValues.dataLancamento,
 			categorias: formValues.categorias.map(r => {
 				return {
 					... new Categoria(),
-					id: r
+					id: r.id
 				};
 			})
 		}
@@ -130,7 +134,7 @@ export class MidiaComponent implements OnInit {
             descricao: this.midia.descricao,
             categorias: this.midia.categorias
 		});
-		
+
 		this.isDeveEditar = false;
     }
 

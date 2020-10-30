@@ -19,7 +19,7 @@
 
     <mat-form-field>
         <mat-label>Categorias</mat-label>
-        <mat-select formControlName="categorias" multiple>
+        <mat-select formControlName="categorias" multiple [compareWith]="compareFn">
             <mat-option *ngFor="let categoria of listCategorias" [value]="categoria">{{categoria.descricao}}</mat-option>
         </mat-select>
     </mat-form-field>
