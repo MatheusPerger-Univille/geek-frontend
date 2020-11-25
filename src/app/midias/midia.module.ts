@@ -17,15 +17,16 @@ const ROUTES: Routes = [
     path: 'series',
     loadChildren: () => import('./series/series.module').then(m => m.SeriesModule)
   },
+  {
+    path: 'livros',
+    loadChildren: () => import('./livros/livros.module').then(m => m.LivrosModule)
+  },
   
 ];
 
 @NgModule({
   declarations: [
-    MidiasComponent,
-    LivrosComponent,
-    InformacoesLivroComponent,
-    LivroComponent
+    MidiasComponent
   ],
   imports: [
     CommonModule,

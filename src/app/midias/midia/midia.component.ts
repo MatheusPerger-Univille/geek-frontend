@@ -27,7 +27,8 @@ export class MidiaComponent implements OnInit {
 		if (!this.midia) {
 			return;
 		}
-
+console.log('HHHHHH');
+console.log(this.midia.tipo);
 		switch(this.midia.tipo) {
 			
 			case TipoMidia.FILME:
@@ -110,7 +111,7 @@ export class MidiaComponent implements OnInit {
 			categorias: formValues.categorias.map(r => {
 				return {
 					... new Categoria(),
-					id: r
+					id: r.id
 				};
 			})
 		}
