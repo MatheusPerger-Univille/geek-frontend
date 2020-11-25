@@ -29,16 +29,21 @@ export class FilmesService extends ServiceBase<Filme> {
     return this.httpClient.get<EntityBase<FilmesPesquisa>>(`${this.API_PATH}/filtrar?search=${paginacao.search}&${paginacao.toString()}`)
   }
 
-  salvar(value: Filme): Observable<any> {
+  salvar(value: Filme): Observable<number> {
 
     if (value.id) {
-      return this.httpClient.put(`${this.API_PATH}`, value);
+      return this.httpClient.put<number>(`${this.API_PATH}`, value);
     }
-    return this.httpClient.post(`${this.API_PATH}`, value);
+    return this.httpClient.post<number>(`${this.API_PATH}`, value);
   }
 
   excluir(value: number): Observable<any> {
     
     return this.httpClient.delete(`${this.API_PATH}/${value}`);
+  }
+
+  uploadImagem(form: FormData, idFilme: number): Observable<any> {
+
+    return this.httpClient.put(`${this.API_PATH}/upload/${idFilme}`, form);
   }
 }
