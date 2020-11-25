@@ -12,7 +12,7 @@ export class Midia extends AbstractModel {
 
     public urlCapa: string;
 
-    public arquivoImagem: File;
+    // public arquivoImagem: File;
 
     public titulo: string;
 

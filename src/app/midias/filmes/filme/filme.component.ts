@@ -9,6 +9,7 @@ import { NotificationService } from 'src/app/core/components/shared/notification
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { TipoMidia } from 'src/app/core/models/enums/tipo-midia.enum';
 import { AbstractComponentComponent } from 'src/app/core/components/shared/abstract-component/abstract-component.component';
+import { finalize } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-filme',
@@ -31,6 +32,8 @@ export class FilmeComponent extends AbstractComponentComponent implements OnInit
 	filme = new Filme();
 	
 	isEdicao = false;
+
+	imagemMidia: File;
 
 	constructor(private router: Router,
 		private route: ActivatedRoute,
@@ -113,24 +116,27 @@ export class FilmeComponent extends AbstractComponentComponent implements OnInit
 		this.imagemCapaValida = value !== undefined;
 
 		if (value) {
-			this.filme = {
-				... this.filme,
-				arquivoImagem: value
-			}
+			this.imagemMidia = value;
 		}
 	}
 
 	onComplete() {
 		this.blockUI.start();
 
-		this.filmesService.salvar(this.filme).subscribe(result => {
-			NotificationService.success(`Filme ${this.filme.titulo.toUpperCase()} salvo com sucesso.`);
-			this.blockUI.stop();
-			this.irParaListagem();
-		}, error => {
-			NotificationService.error(`Ocorreu uma falha ao tentar salvar o filme. ${error.error.message}`);
-			this.blockUI.stop();
-		});
+		this.filmesService.salvar(this.filme)
+			.pipe(finalize(() => this.blockUI.stop()))
+			.subscribe(result => {
+
+				if (this.imagemMidia) {
+					this.uploadImagem(result);
+				} else {
+					NotificationService.success(`Filme ${this.filme.titulo.toUpperCase()} salvo com sucesso.`);
+					this.irParaListagem();
+				}
+
+			}, 
+				error => NotificationService.error(`Ocorreu uma falha ao tentar salvar o filme. ${error.error.message}`)
+			);
 	}
 
 	irParaListagem() {
@@ -139,6 +145,23 @@ export class FilmeComponent extends AbstractComponentComponent implements OnInit
 
 	onVoltar() {
 		this.irParaListagem();
+	}
+
+	private uploadImagem(idMidia: number) {
+
+		this.blockUI.update('Salvando imagem...');
+
+		const formData = new FormData();
+		formData.append('file', this.imagemMidia);
+		
+		this.filmesService.uploadImagem(formData, idMidia)
+			.pipe(finalize(() => this.blockUI.stop()))
+			.subscribe(r => {
+				NotificationService.success(`Filme ${this.filme.titulo.toUpperCase()} salvo com sucesso.`);
+				this.irParaListagem();
+			}, 
+				error => NotificationService.error(`Ocorreu uma falha ao tentar salvar a imagem do filme. ${error.error.message}`)
+			)
 	}
 
 }
