@@ -1,0 +1,66 @@
+<div class="container">
+  <mat-card>
+
+      <app-page-title title="Série" subtitle="Cadastro de filme" [showBackButton]="true" 
+        (onBackClicked)="onVoltar()"></app-page-title>
+
+      <mat-card-content>
+        <mat-horizontal-stepper labelPosition="bottom" linear #stepper>
+            <ng-template matStepperIcon="edit">
+              <mat-icon>done</mat-icon>
+            </ng-template>
+
+            <mat-step [completed]="dadosIniciaisValidos">
+              <ng-template matStepLabel>Dados iniciais</ng-template>
+
+              <app-midia [midia]="midia" (valid)="onMidiaValido($event)"></app-midia>
+
+              <div class="row">
+                <div class="col-12 text-center">
+                  <button class="btn btn-outline-success button-form button-next" [disabled]="!dadosIniciaisValidos" matStepperNext>Próximo</button>
+                </div>
+              </div>
+            </mat-step>
+
+            <mat-step [completed]="informacoesValidas">
+              <ng-template matStepLabel>Informações</ng-template>
+
+              <app-informacoes-serie [informacoes]="serie" (valid)="onInformacoesValidas($event)"></app-informacoes-serie>
+
+              <div class="row">
+                <div class="col-12 text-center">
+                  <button class="btn btn-outline-danger button-form button-previous" matStepperPrevious>Voltar</button>
+                  <button class="btn btn-outline-success button-form button-next" [disabled]="!informacoesValidas" matStepperNext>Próximo</button>
+                </div>
+              </div>
+            </mat-step>
+
+            <mat-step [completed]="imagemCapaValida" optional>
+              <ng-template matStepLabel>Imagem capa</ng-template>
+
+              <app-imagem-capa [objetoUrl]="serie" (valid)="onImagemValida($event)"></app-imagem-capa>
+
+              <div class="row">
+                <div class="col-12 text-center">
+                  <button class="btn btn-outline-danger button-form button-previous" matStepperPrevious>Voltar</button>
+                  <button class="btn btn-outline-success button-form button-next" matStepperNext>Próximo</button>
+                </div>
+              </div>
+            </mat-step>
+
+            <mat-step [completed]="isEdicao">
+              <ng-template matStepLabel>Finalizar</ng-template>
+              <p>O cadastro será finalizado</p>
+              <div>
+                <div class="col-12 text-center">
+                  <button class="btn btn-outline-danger button-form button-previous" matStepperPrevious>Voltar</button>
+                  <button class="btn btn-outline-success button-form button-next" (click)="onComplete()">Finalizar</button>
+                </div>
+              </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+          
+      </mat-card-content>
+
+  </mat-card>
+</div>
