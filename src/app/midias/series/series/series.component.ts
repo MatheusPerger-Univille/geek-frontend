@@ -1,51 +1,51 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Paging } from '../../core/models/paging.model';
+import { ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PagingService } from '../../core/services/paging.service';
-import { Observable } from 'rxjs';
-import { EntityBase } from '../../core/models/entity-base.model';
-import { FilmesService } from './filmes.service';
-import { debounceTime, distinctUntilChanged, finalize } from 'rxjs/operators';
-import { AppConfig } from '../../core/configs/app.configs';
-import { FilmesPesquisa } from './filmes-pesquisa.model';
-import { NotificationService } from 'src/app/core/components/shared/notification/notification.service';
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { DataTableDirective } from 'angular-datatables';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, finalize } from 'rxjs/operators';
+import { NotificationService } from 'src/app/core/components/shared/notification/notification.service';
+import { AppConfig } from 'src/app/core/configs/app.configs';
+import { EntityBase } from 'src/app/core/models/entity-base.model';
+import { Paging } from 'src/app/core/models/paging.model';
+import { PagingService } from 'src/app/core/services/paging.service';
+import { SeriesService } from '../../series/series.service';
+import { SeriesPesquisa } from './series-pesquisa.model';
 
 @Component({
-	selector: 'app-filmes',
-	templateUrl: './filmes.component.html',
-	styleUrls: ['./filmes.component.css']
+  selector: 'app-series',
+  templateUrl: './series.component.html',
+  styleUrls: ['./series.component.css']
 })
-export class FilmesComponent implements OnInit {
+export class SeriesComponent implements OnInit {
 
 	@BlockUI() 
-	  blockUI: NgBlockUI;
+	blockUI: NgBlockUI;
 	  
 	@ViewChild(DataTableDirective, { static: false })
     dtElement: DataTableDirective;
 
-	filmes: FilmesPesquisa[];
+  	series: SeriesPesquisa[];
 	paginacao: Paging;
 	dtOptions: any = {};
 	ordenacao = [[1, 'desc']];
-	nenhumRegistro = true;
+  	nenhumRegistro = true;
 
 	colunas = [
 		{ data: 'id', orderable: true },
 		{ data: 'titulo', orderable: true },
 		{ data: 'dataLancamento', orderable: true },
 		{ data: '', orderable: false },
-	];
-
+  	];
+  
 	constructor(
 		private router: Router,
 		private pgService: PagingService,
-		private filmesService: FilmesService
+		private seriesService: SeriesService
 	) { }
 
 	ngOnInit(): void {
-
 		this.carregarDataTable();
 	}
 
@@ -62,16 +62,16 @@ export class FilmesComponent implements OnInit {
 
 				const p = this.paginacao ? this.paginacao : this.pgService.build(data, this.colunas);
 
-				const req: Observable<EntityBase<FilmesPesquisa>> = this.filmesService.filtrar(p);
+				const req: Observable<EntityBase<SeriesPesquisa>> = this.seriesService.filtrar(p);
 
 				req.pipe(
 					debounceTime(500),
 					distinctUntilChanged()
-				).subscribe((f: EntityBase<FilmesPesquisa>) => {
+				).subscribe((f: EntityBase<SeriesPesquisa>) => {
 
-					this.filmes = f.content;
+					this.series = f.content;
 
-					this.nenhumRegistro = this.filmes.length === 0;
+					this.nenhumRegistro = this.series.length === 0;
 
 					callback({
 						rerecordsTotal: f.totalElements,
@@ -98,55 +98,55 @@ export class FilmesComponent implements OnInit {
 				]
 			}
 		};
-
-	}
-
+  	}
+  
 	botaoCriar() {
 		return {
 			text: `<i class="fa fa-plus"></i>`,
 			className: 'btn-outline-success',
 			key: { key: 'n', altKey: true },
 			action: () => {
-				this.router.navigateByUrl('midias/filmes/criar');
+				this.router.navigateByUrl('midias/series/criar');
 			}
 		};
-	}
-
+  	}
+  
 	onClickEditar(index: number) {
 
-		const filme = this.filmes[index];
-		this.router.navigate(['midias/filmes/editar', filme.id]);
-	}
+		const serie = this.series[index];
+		this.router.navigate(['midias/series/editar', serie.id]);
+  	}
+  
+  	onClickExcluir(index: number) {
 
-	onClickExcluir(index: number) {
-
-		const filme = this.filmes[index];
+		const serie = this.series[index];
 	
-		NotificationService.confirm(`Deseja continuar a exclusão de ${filme.titulo}?`, () => {
-			this.excluirRegistro(filme.id);
-		}, error => {
-			NotificationService.error('Ocorreu um erro ao tentar excluir o filme.');
-		});
+		NotificationService.confirm(`Deseja continuar a exclusão de ${serie.titulo}?`, () => {
+			this.excluirRegistro(serie.id);
+		}, 
+			error => NotificationService.error(`Ocorreu um erro ao tentar excluir a série. ${error.error.message}`)
+		);
 		
-	}
-
+  	}
+  
 	private reloadDataTable() {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
             dtInstance.ajax.reload();
         });
-    }
+  	}
 
+  
 	private excluirRegistro(id: number) {
+
 		this.blockUI.start();
 
-		this.filmesService.excluir(id)
+		this.seriesService.excluir(id)
 			.pipe(finalize(() => this.blockUI.stop()))
 			.subscribe(r => {
 				NotificationService.success('Registro excluído com sucesso!');
 				this.reloadDataTable();
-			},
-				error => NotificationService.error(`Algo deu errado durante a exclusão do registro: ${error.error.message}.`)
+			}, 
+				error => NotificationService.error(`Algo deu errado durante a exclusão do registro. ${error.error.message}`)
 			);
 	}
-
 }

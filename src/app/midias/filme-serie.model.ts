@@ -14,4 +14,8 @@ export class FilmeSerie extends Midia {
 
     public faixaEtaria: FaixaEtaria;
 
+    public numeroEpisodios: number;
+
+    public numeroTemporadas: number;
+    
 }

@@ -1,36 +1,38 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Paging } from '../../core/models/paging.model';
-import { Router } from '@angular/router';
-import { PagingService } from '../../core/services/paging.service';
-import { Observable } from 'rxjs';
-import { EntityBase } from '../../core/models/entity-base.model';
-import { FilmesService } from './filmes.service';
-import { debounceTime, distinctUntilChanged, finalize } from 'rxjs/operators';
-import { AppConfig } from '../../core/configs/app.configs';
-import { FilmesPesquisa } from './filmes-pesquisa.model';
-import { NotificationService } from 'src/app/core/components/shared/notification/notification.service';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { DataTableDirective } from 'angular-datatables';
+import { Paging } from '../../core/models/paging.model';
+import { LivrosPesquisa } from './livros-pesquisa.model';
+import { Router } from '@angular/router';
+import { PagingService } from 'src/app/core/services/paging.service';
+import { LivrosService } from './livros.service';
+import { AppConfig } from 'src/app/core/configs/app.configs';
+import { Observable, pipe } from 'rxjs';
+import { EntityBase } from 'src/app/core/models/entity-base.model';
+import { debounceTime, distinctUntilChanged, finalize } from 'rxjs/operators';
+import { NotificationService } from 'src/app/core/components/shared/notification/notification.service';
+import { Livro } from './livro/livro.model';
+
 
 @Component({
-	selector: 'app-filmes',
-	templateUrl: './filmes.component.html',
-	styleUrls: ['./filmes.component.css']
+  selector: 'app-livros',
+  templateUrl: './livros.component.html',
+  styleUrls: ['./livros.component.css']
 })
-export class FilmesComponent implements OnInit {
+export class LivrosComponent implements OnInit {
 
 	@BlockUI() 
 	  blockUI: NgBlockUI;
 	  
 	@ViewChild(DataTableDirective, { static: false })
-    dtElement: DataTableDirective;
+  	dtElement: DataTableDirective;
 
-	filmes: FilmesPesquisa[];
+	livros: LivrosPesquisa[];
 	paginacao: Paging;
 	dtOptions: any = {};
 	ordenacao = [[1, 'desc']];
-	nenhumRegistro = true;
-
+  	nenhumRegistro = true;
+  
 	colunas = [
 		{ data: 'id', orderable: true },
 		{ data: 'titulo', orderable: true },
@@ -38,11 +40,10 @@ export class FilmesComponent implements OnInit {
 		{ data: '', orderable: false },
 	];
 
-	constructor(
-		private router: Router,
+	constructor(private router: Router,
 		private pgService: PagingService,
-		private filmesService: FilmesService
-	) { }
+		private livrosService: LivrosService
+	) {}
 
 	ngOnInit(): void {
 
@@ -62,16 +63,16 @@ export class FilmesComponent implements OnInit {
 
 				const p = this.paginacao ? this.paginacao : this.pgService.build(data, this.colunas);
 
-				const req: Observable<EntityBase<FilmesPesquisa>> = this.filmesService.filtrar(p);
+				const req: Observable<EntityBase<LivrosPesquisa>> = this.livrosService.filtrar(p);
 
 				req.pipe(
 					debounceTime(500),
 					distinctUntilChanged()
-				).subscribe((f: EntityBase<FilmesPesquisa>) => {
+				).subscribe((f: EntityBase<LivrosPesquisa>) => {
 
-					this.filmes = f.content;
+					this.livros = f.content;
 
-					this.nenhumRegistro = this.filmes.length === 0;
+					this.nenhumRegistro = this.livros.length === 0;
 
 					callback({
 						rerecordsTotal: f.totalElements,
@@ -101,52 +102,52 @@ export class FilmesComponent implements OnInit {
 
 	}
 
-	botaoCriar() {
-		return {
-			text: `<i class="fa fa-plus"></i>`,
-			className: 'btn-outline-success',
-			key: { key: 'n', altKey: true },
-			action: () => {
-				this.router.navigateByUrl('midias/filmes/criar');
-			}
-		};
-	}
-
 	onClickEditar(index: number) {
 
-		const filme = this.filmes[index];
-		this.router.navigate(['midias/filmes/editar', filme.id]);
+		const livro = this.livros[index];
+		this.router.navigate(['midias/livros/editar', livro.id]);
 	}
 
 	onClickExcluir(index: number) {
 
-		const filme = this.filmes[index];
+		const livro = this.livros[index];
 	
-		NotificationService.confirm(`Deseja continuar a exclusão de ${filme.titulo}?`, () => {
-			this.excluirRegistro(filme.id);
-		}, error => {
-			NotificationService.error('Ocorreu um erro ao tentar excluir o filme.');
-		});
+		NotificationService.confirm(`Deseja continuar a exclusão de ${livro.titulo}?`, () => {
+			this.excluirRegistro(livro.id);
+		}, 
+			error => NotificationService.error(`Ocorreu um erro ao tentar excluir o livro. ${error.error.message}`)
+		);
 		
 	}
 
-	private reloadDataTable() {
+	reloadDataTable() {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
             dtInstance.ajax.reload();
         });
     }
 
 	private excluirRegistro(id: number) {
+		
 		this.blockUI.start();
 
-		this.filmesService.excluir(id)
+		this.livrosService.excluir(id)
 			.pipe(finalize(() => this.blockUI.stop()))
 			.subscribe(r => {
 				NotificationService.success('Registro excluído com sucesso!');
 				this.reloadDataTable();
-			},
-				error => NotificationService.error(`Algo deu errado durante a exclusão do registro: ${error.error.message}.`)
+			}, 
+				error => NotificationService.error(`Algo deu errado durante a exclusão do registro. . ${error.error.message}`)
 			);
 	}
 
+  	botaoCriar() {
+		return {
+			text: `<i class="fa fa-plus"></i>`,
+			className: 'btn-outline-success',
+			key: { key: 'n', altKey: true },
+			action: () => {
+				this.router.navigateByUrl('midias/livros/criar');
+			}
+		};
+	}
 }

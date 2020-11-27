@@ -1,0 +1,23 @@
+<form class="form-linha" [formGroup]="formGroup">
+    
+    <mat-form-field class="example-full-width">
+        <mat-label>Autor</mat-label>
+        <input matInput formControlName="autor">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Editora</mat-label>
+        <input matInput formControlName="editora">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Número de páginas</mat-label>
+        <input type="number" matInput formControlName="numeroPaginas">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Peso (g)</mat-label>
+        <input type="number" matInput formControlName="peso">
+    </mat-form-field>
+
+</form>
