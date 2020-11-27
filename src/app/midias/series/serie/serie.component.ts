@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { finalize } from 'rxjs/operators';
 import { AbstractComponentComponent } from 'src/app/core/components/shared/abstract-component/abstract-component.component';
 import { NotificationService } from 'src/app/core/components/shared/notification/notification.service';
 import { TipoMidia } from 'src/app/core/models/enums/tipo-midia.enum';
@@ -33,22 +34,22 @@ export class SerieComponent extends AbstractComponentComponent implements OnInit
 	
 	isEdicao = false;
 
-  constructor(private router: Router,
+	constructor(private router: Router,
 		private route: ActivatedRoute,
-    private seriesService: SeriesService
-    ) {
-      super(TipoMidia.SERIE);
-   }
+		private seriesService: SeriesService) {
+		
+			super(TipoMidia.SERIE);
+	}
 
-  ngOnInit(): void {
+  	ngOnInit(): void {
   
 		const id = +this.route.snapshot.paramMap.get("id");
 
 		if (id) {
 			this.carregarValoresEdicao(id);
-    }
+    	}
     
-  }
+  	}
 
 	private carregarValoresEdicao(id: number) {
 
@@ -58,26 +59,26 @@ export class SerieComponent extends AbstractComponentComponent implements OnInit
 			NotificationService.error(`Ocorreu um erro ao recuperar a serie: ${error.error.message}`);
         	this.irParaListagem();
 		});
-  }
+  	}
 
 	private setarValoresEdicao(values: Serie) {
         
-    this.serie = {
-        ...this.serie,
-        ...super.setarMidia(values),
-        direcao: values.direcao,
-        elenco: values.elenco,
-        nascionalidade: values.nascionalidade,
-        duracao: values.duracao,
-		numeroEpisodios: values.numeroEpisodios,
-		numeroTemporadas: values.numeroTemporadas,
-		faixaEtaria: values.faixaEtaria,
-    }
+		this.serie = {
+			...this.serie,
+			...super.setarMidia(values),
+			direcao: values.direcao,
+			elenco: values.elenco,
+			nascionalidade: values.nascionalidade,
+			duracao: values.duracao,
+			numeroEpisodios: values.numeroEpisodios,
+			numeroTemporadas: values.numeroTemporadas,
+			faixaEtaria: values.faixaEtaria,
+		}
 
         this.dadosIniciaisValidos = true;
         this.informacoesValidas = true;
         this.isEdicao = true;
-  }
+  	}
   
 	onMidiaValido(value: Midia) {
 
@@ -110,6 +111,7 @@ export class SerieComponent extends AbstractComponentComponent implements OnInit
 				numeroTemporadas: value.numeroTemporadas,
 				faixaEtaria: value.faixaEtaria
 			}
+
 		}
 	}
 
@@ -126,20 +128,21 @@ export class SerieComponent extends AbstractComponentComponent implements OnInit
 	}
 
 	onComplete() {
+
 		this.blockUI.start();
 
-		this.seriesService.salvar(this.serie).subscribe(result => {
-			NotificationService.success(`Filme ${this.serie.titulo.toUpperCase()} salvo com sucesso.`);
-			this.blockUI.stop();
-			this.irParaListagem();
-		}, error => {
-			NotificationService.error(`Ocorreu uma falha ao tentar salvar o serie. ${error.error.message}`);
-			this.blockUI.stop();
-		});
+		this.seriesService.salvar(this.serie)
+			.pipe(finalize(() => this.blockUI.stop()))
+			.subscribe(result => {
+				NotificationService.success(`Série ${this.serie.titulo.toUpperCase()} salva com sucesso.`);
+				this.irParaListagem();
+			}, 
+				error => NotificationService.error(`Ocorreu uma falha ao tentar salvar a série. ${error.error.message}`)
+			);
 	}
 
 	irParaListagem() {
-		this.router.navigateByUrl('midias/filmes');
+		this.router.navigateByUrl('midias/series');
 	}
 
 	onVoltar() {

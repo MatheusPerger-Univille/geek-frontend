@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
 import { PagingService } from 'src/app/core/services/paging.service';
 import { LivrosService } from './livros.service';
 import { AppConfig } from 'src/app/core/configs/app.configs';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { EntityBase } from 'src/app/core/models/entity-base.model';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, finalize } from 'rxjs/operators';
 import { NotificationService } from 'src/app/core/components/shared/notification/notification.service';
 import { Livro } from './livro/livro.model';
 
@@ -25,13 +25,13 @@ export class LivrosComponent implements OnInit {
 	  blockUI: NgBlockUI;
 	  
 	@ViewChild(DataTableDirective, { static: false })
-  dtElement: DataTableDirective;
+  	dtElement: DataTableDirective;
 
 	livros: LivrosPesquisa[];
 	paginacao: Paging;
 	dtOptions: any = {};
 	ordenacao = [[1, 'desc']];
-  nenhumRegistro = true;
+  	nenhumRegistro = true;
   
 	colunas = [
 		{ data: 'id', orderable: true },
@@ -40,16 +40,15 @@ export class LivrosComponent implements OnInit {
 		{ data: '', orderable: false },
 	];
 
-  constructor(
-    private router: Router,
+	constructor(private router: Router,
 		private pgService: PagingService,
 		private livrosService: LivrosService
-  ) {}
+	) {}
 
-  ngOnInit(): void {
-	this.carregarDataTable();
+	ngOnInit(): void {
 
-  }
+		this.carregarDataTable();
+	}
 
 	carregarDataTable() {
 
@@ -115,10 +114,9 @@ export class LivrosComponent implements OnInit {
 	
 		NotificationService.confirm(`Deseja continuar a exclusão de ${livro.titulo}?`, () => {
 			this.excluirRegistro(livro.id);
-			this.reloadDataTable();
-		}, error => {
-			NotificationService.error('Ocorreu um erro ao tentar excluir o filme.');
-		});
+		}, 
+			error => NotificationService.error(`Ocorreu um erro ao tentar excluir o livro. ${error.error.message}`)
+		);
 		
 	}
 
@@ -129,18 +127,20 @@ export class LivrosComponent implements OnInit {
     }
 
 	private excluirRegistro(id: number) {
+		
 		this.blockUI.start();
 
-		this.livrosService.excluir(id).subscribe(r => {
-			NotificationService.success('Registro excluído com sucesso!');
-			this.blockUI.stop();
-		}, error => {
-			NotificationService.error(`Algo deu errado durante a exclusão do registro`);
-			this.blockUI.stop();
-		});
+		this.livrosService.excluir(id)
+			.pipe(finalize(() => this.blockUI.stop()))
+			.subscribe(r => {
+				NotificationService.success('Registro excluído com sucesso!');
+				this.reloadDataTable();
+			}, 
+				error => NotificationService.error(`Algo deu errado durante a exclusão do registro. . ${error.error.message}`)
+			);
 	}
 
-  botaoCriar() {
+  	botaoCriar() {
 		return {
 			text: `<i class="fa fa-plus"></i>`,
 			className: 'btn-outline-success',

@@ -5,7 +5,7 @@ import { PagingService } from '../../core/services/paging.service';
 import { Observable } from 'rxjs';
 import { EntityBase } from '../../core/models/entity-base.model';
 import { FilmesService } from './filmes.service';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, finalize } from 'rxjs/operators';
 import { AppConfig } from '../../core/configs/app.configs';
 import { FilmesPesquisa } from './filmes-pesquisa.model';
 import { NotificationService } from 'src/app/core/components/shared/notification/notification.service';
@@ -124,14 +124,13 @@ export class FilmesComponent implements OnInit {
 	
 		NotificationService.confirm(`Deseja continuar a exclusão de ${filme.titulo}?`, () => {
 			this.excluirRegistro(filme.id);
-			this.reloadDataTable();
 		}, error => {
 			NotificationService.error('Ocorreu um erro ao tentar excluir o filme.');
 		});
 		
 	}
 
-	reloadDataTable() {
+	private reloadDataTable() {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
             dtInstance.ajax.reload();
         });
@@ -140,13 +139,14 @@ export class FilmesComponent implements OnInit {
 	private excluirRegistro(id: number) {
 		this.blockUI.start();
 
-		this.filmesService.excluir(id).subscribe(r => {
-			NotificationService.success('Registro excluído com sucesso!');
-			this.blockUI.stop();
-		}, error => {
-			NotificationService.error(`Algo deu errado durante a exclusão do registro`);
-			this.blockUI.stop();
-		});
+		this.filmesService.excluir(id)
+			.pipe(finalize(() => this.blockUI.stop()))
+			.subscribe(r => {
+				NotificationService.success('Registro excluído com sucesso!');
+				this.reloadDataTable();
+			},
+				error => NotificationService.error(`Algo deu errado durante a exclusão do registro: ${error.error.message}.`)
+			);
 	}
 
 }

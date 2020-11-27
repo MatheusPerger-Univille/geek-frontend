@@ -22,13 +22,16 @@ export class MidiaComponent implements OnInit {
 
 	isDeveEditar = true;
 
+	compareFn(f1: any, f2: any): boolean{
+		return f1.id == f2.id;
+	}
+
 	get listCategorias(): CategoriasModelo[] {
 
 		if (!this.midia) {
 			return;
 		}
-console.log('HHHHHH');
-console.log(this.midia.tipo);
+
 		switch(this.midia.tipo) {
 			
 			case TipoMidia.FILME:

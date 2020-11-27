@@ -17,7 +17,6 @@ export class LivrosService extends ServiceBase<Livro> {
 
     protected API_PATH = API_CONFIG.baseUrl + '/api/livros';
 
-
     constructor(protected httpClient: HttpClient) {
         super(httpClient);
     }
@@ -25,7 +24,7 @@ export class LivrosService extends ServiceBase<Livro> {
     filtrar(paginacao?: Paging): Observable<EntityBase<LivrosPesquisa>> {
 
         if (!paginacao) {
-        paginacao = new Paging();
+            paginacao = new Paging();
         }
 
         return this.httpClient.get<EntityBase<LivrosPesquisa>>(`${this.API_PATH}/filtrar?search=${paginacao.search}&${paginacao.toString()}`)
@@ -34,9 +33,9 @@ export class LivrosService extends ServiceBase<Livro> {
     salvar(value: Livro): Observable<any> {
 
         if (value.id) {
-        return this.httpClient.put(`${this.API_PATH}`, value);
+            return this.httpClient.put(`${this.API_PATH}`, value);
         }
-        return this.httpClient.post(`${this.API_PATH}`, value);
+            return this.httpClient.post(`${this.API_PATH}`, value);
     }
 
 

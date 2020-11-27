@@ -13,7 +13,7 @@ import { SeriesPesquisa } from './series/series-pesquisa.model';
 })
 export class SeriesService extends ServiceBase<Serie> {
 
-  protected API_PATH = API_CONFIG.baseUrl + '/api/series'; // sempre plural
+  protected API_PATH = API_CONFIG.baseUrl + '/api/series';
 
   constructor(protected httpClient: HttpClient) {
     super(httpClient);

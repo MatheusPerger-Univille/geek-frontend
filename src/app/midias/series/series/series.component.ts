@@ -4,13 +4,12 @@ import { Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, finalize } from 'rxjs/operators';
 import { NotificationService } from 'src/app/core/components/shared/notification/notification.service';
 import { AppConfig } from 'src/app/core/configs/app.configs';
 import { EntityBase } from 'src/app/core/models/entity-base.model';
 import { Paging } from 'src/app/core/models/paging.model';
 import { PagingService } from 'src/app/core/services/paging.service';
-import { FilmesPesquisa } from '../../filmes/filmes-pesquisa.model';
 import { SeriesService } from '../../series/series.service';
 import { SeriesPesquisa } from './series-pesquisa.model';
 
@@ -22,23 +21,23 @@ import { SeriesPesquisa } from './series-pesquisa.model';
 export class SeriesComponent implements OnInit {
 
 	@BlockUI() 
-	  blockUI: NgBlockUI;
+	blockUI: NgBlockUI;
 	  
 	@ViewChild(DataTableDirective, { static: false })
     dtElement: DataTableDirective;
 
-  series: SeriesPesquisa[];
+  	series: SeriesPesquisa[];
 	paginacao: Paging;
 	dtOptions: any = {};
 	ordenacao = [[1, 'desc']];
-  nenhumRegistro = true;
+  	nenhumRegistro = true;
 
 	colunas = [
 		{ data: 'id', orderable: true },
 		{ data: 'titulo', orderable: true },
 		{ data: 'dataLancamento', orderable: true },
 		{ data: '', orderable: false },
-  ];
+  	];
   
 	constructor(
 		private router: Router,
@@ -46,9 +45,9 @@ export class SeriesComponent implements OnInit {
 		private seriesService: SeriesService
 	) { }
 
-  ngOnInit(): void {
-    this.carregarDataTable();
-  }
+	ngOnInit(): void {
+		this.carregarDataTable();
+	}
 
 	carregarDataTable() {
 
@@ -99,7 +98,7 @@ export class SeriesComponent implements OnInit {
 				]
 			}
 		};
-  }
+  	}
   
 	botaoCriar() {
 		return {
@@ -110,43 +109,44 @@ export class SeriesComponent implements OnInit {
 				this.router.navigateByUrl('midias/series/criar');
 			}
 		};
-  }
+  	}
   
 	onClickEditar(index: number) {
 
 		const serie = this.series[index];
 		this.router.navigate(['midias/series/editar', serie.id]);
-  }
+  	}
   
-  onClickExcluir(index: number) {
+  	onClickExcluir(index: number) {
 
 		const serie = this.series[index];
 	
 		NotificationService.confirm(`Deseja continuar a exclusão de ${serie.titulo}?`, () => {
 			this.excluirRegistro(serie.id);
-			this.reloadDataTable();
-		}, error => {
-			NotificationService.error('Ocorreu um erro ao tentar excluir o filme.');
-		});
+		}, 
+			error => NotificationService.error(`Ocorreu um erro ao tentar excluir a série. ${error.error.message}`)
+		);
 		
-  }
+  	}
   
-	reloadDataTable() {
+	private reloadDataTable() {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
             dtInstance.ajax.reload();
         });
-  }
+  	}
 
   
 	private excluirRegistro(id: number) {
+
 		this.blockUI.start();
 
-		this.seriesService.excluir(id).subscribe(r => {
-			NotificationService.success('Registro excluído com sucesso!');
-			this.blockUI.stop();
-		}, error => {
-			NotificationService.error(`Algo deu errado durante a exclusão do registro`);
-			this.blockUI.stop();
-		});
+		this.seriesService.excluir(id)
+			.pipe(finalize(() => this.blockUI.stop()))
+			.subscribe(r => {
+				NotificationService.success('Registro excluído com sucesso!');
+				this.reloadDataTable();
+			}, 
+				error => NotificationService.error(`Algo deu errado durante a exclusão do registro. ${error.error.message}`)
+			);
 	}
 }
