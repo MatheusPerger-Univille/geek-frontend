@@ -32,6 +32,8 @@ export class LivroComponent extends AbstractComponentComponent implements OnInit
 	
 	isEdicao = false;
 
+	imagemMidia: File;
+
   	constructor(private router: Router,
 		private route: ActivatedRoute,
 		private livrosService: LivrosService) {
@@ -96,10 +98,7 @@ export class LivroComponent extends AbstractComponentComponent implements OnInit
 		this.imagemCapaValida = value !== undefined;
 	
 		if (value) {
-			this.livro = {
-				... this.livro,
-				arquivoImagem: value
-			}
+			this.imagemMidia = value;
 		}
 	}
 

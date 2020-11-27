@@ -29,7 +29,9 @@ export class GameComponent extends AbstractComponentComponent implements OnInit 
 
 	game = new Game();
 	
-	isEdicao = false;
+  isEdicao = false;
+  
+  imagemMidia: File;
 
   constructor(private router: Router,
 		private route: ActivatedRoute,
@@ -50,7 +52,7 @@ export class GameComponent extends AbstractComponentComponent implements OnInit 
     private carregarValoresEdicao(id: number) {
 
       this.gamesService.obterPorId(id).subscribe(result => {
-        //this.setarValoresEdicao(result);
+        this.setarValoresEdicao(result);
       }, error => {
         NotificationService.error(`Ocorreu um erro ao recuperar o filme: ${error.error.message}`);
             this.irParaListagem();
@@ -90,10 +92,7 @@ export class GameComponent extends AbstractComponentComponent implements OnInit 
       this.imagemCapaValida = value !== undefined;
   
       if (value) {
-        this.game = {
-          ... this.game,
-          arquivoImagem: value
-        }
+        this.imagemMidia = value;
       }
     }
 

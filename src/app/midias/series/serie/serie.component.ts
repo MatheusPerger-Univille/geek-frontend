@@ -34,6 +34,8 @@ export class SerieComponent extends AbstractComponentComponent implements OnInit
 	
 	isEdicao = false;
 
+	imagemMidia: File;
+
 	constructor(private router: Router,
 		private route: ActivatedRoute,
 		private seriesService: SeriesService) {
@@ -120,10 +122,7 @@ export class SerieComponent extends AbstractComponentComponent implements OnInit
 		this.imagemCapaValida = value !== undefined;
 
 		if (value) {
-			this.serie = {
-				... this.serie,
-				arquivoImagem: value
-			}
+			this.imagemMidia = value;
 		}
 	}
 
