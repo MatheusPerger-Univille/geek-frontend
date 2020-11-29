@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'midias',
     loadChildren: () => import('./midias/midia.module').then(m => m.MidiaModule)
+  },
+  {
+    path: 'usuarios',
+    loadChildren: () => import('./usuario/usuario.module').then(m => m.UsuarioModule)
   }
 ];
 
