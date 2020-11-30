@@ -4,7 +4,7 @@
 
     <nav class="menu">
         <ul>
-            <li><a>Filmes</a>
+            <li><a (click)="onPesquisaMidia('filmes')">Filmes</a>
 
                 <ul>
                     <li *ngFor="let categoria of listCategoriasFilmes">
@@ -14,7 +14,7 @@
                 
             </li>
 
-            <li><a>Games</a>
+            <li><a (click)="onPesquisaMidia('games')">Games</a>
 
                 <ul>
                     <li *ngFor="let categoria of listCategoriasGames">
@@ -24,7 +24,7 @@
 
             </li>
 
-            <li><a>Livros</a>
+            <li><a (click)="onPesquisaMidia('livros')">Livros</a>
 
                 <ul>
                     <li *ngFor="let categoria of listCategoriasLivros">
@@ -34,7 +34,7 @@
 
             </li>
 
-            <li><a>Séries</a>
+            <li><a (click)="onPesquisaMidia('series')">Séries</a>
 
                 <ul>
                     <li *ngFor="let categoria of listCategoriasSeries">

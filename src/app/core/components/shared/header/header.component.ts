@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  termo: string;
+
   constructor(
     private router: Router
   ) { }
@@ -17,6 +19,11 @@ export class HeaderComponent implements OnInit {
 
   onMidias() {
     this.router.navigateByUrl('midias');
+  }
+
+  onPesquisar() {
+
+    this.router.navigate(['pesquisa', this.termo]);
   }
 
 }

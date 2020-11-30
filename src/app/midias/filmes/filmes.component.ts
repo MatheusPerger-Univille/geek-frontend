@@ -20,7 +20,7 @@ import { DataTableDirective } from 'angular-datatables';
 export class FilmesComponent implements OnInit {
 
 	@BlockUI() 
-	  blockUI: NgBlockUI;
+	blockUI: NgBlockUI;
 	  
 	@ViewChild(DataTableDirective, { static: false })
     dtElement: DataTableDirective;

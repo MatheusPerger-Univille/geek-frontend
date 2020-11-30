@@ -8,6 +8,7 @@ import { TipoMidia } from 'src/app/core/models/enums/tipo-midia.enum';
 import { GamesService } from '../games.service';
 import { NotificationService } from 'src/app/core/components/shared/notification/notification.service';
 import { Midia } from '../../midia.model';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-game',
@@ -131,5 +132,22 @@ export class GameComponent extends AbstractComponentComponent implements OnInit 
 
     irParaListagem() {
       this.router.navigateByUrl('midias/games');
+    }
+
+    private uploadImagem(idMidia: number) {
+
+      this.blockUI.update('Salvando imagem...');
+  
+      const formData = new FormData();
+      formData.append('file', this.imagemMidia);
+      
+      this.gamesService.uploadImagem(formData, idMidia)
+        .pipe(finalize(() => this.blockUI.stop()))
+        .subscribe(r => {
+          NotificationService.success(`Game ${this.game.titulo.toUpperCase()} salva com sucesso.`);
+          this.irParaListagem();
+        }, 
+          error => NotificationService.error(`Ocorreu uma falha ao tentar salvar a imagem do game. ${error.error.message}`)
+        )
     }
 }

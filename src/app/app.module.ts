@@ -21,6 +21,7 @@ import { SharedModule } from './core/components/shared/shared-module.module';
 import { registerLocaleData } from '@angular/common';
 import localePtBr from '@angular/common/locales/pt';
 import { NavMenuComponent } from './core/components/shared/nav-menu/nav-menu.component';
+import { BuscaResumidaComponent } from './busca-resumida/busca-resumida.component';
 
 registerLocaleData(localePtBr, 'pt');
 
@@ -31,7 +32,8 @@ registerLocaleData(localePtBr, 'pt');
     NotificationPipe,
     HeaderComponent,
     HomeComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    BuscaResumidaComponent
   ],
   entryComponents: [
     BlockUIComponent,

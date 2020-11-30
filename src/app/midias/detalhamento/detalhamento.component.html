@@ -1,0 +1,122 @@
+<div class="div-base">
+    <div class="container div-container">
+        
+        <div class="col-12 d-flex">
+            <div class="col-md-5 col-xl-4">
+                <img alt="xxx" class="imagem" [src]="dadosDetalhamento?.urlCapa ? dadosDetalhamento.urlCapa : '../../../assets/images/posterdefault.jpg'">
+            </div>
+            <div class="col-md-8 col-lg-8">
+                <div class="row title">
+                    {{ dadosDetalhamento?.titulo }}
+                </div>
+
+                <!-- Dados detalhamento -->
+                <div class="row" *ngIf="dadosDetalhamento?.direcao">
+                    Direção: {{ dadosDetalhamento.direcao }}
+                </div>
+                <div class="row" *ngIf="dadosDetalhamento?.elenco">
+                    Elenco: {{ dadosDetalhamento.elenco }}
+                </div>
+                <div class="row" *ngIf="dadosDetalhamento?.nascionalidade">
+                    Nascionalidade: {{ dadosDetalhamento.nascionalidade }}
+                </div>
+                <div class="row" *ngIf="dadosDetalhamento?.dataLancamento">
+                    Data lançamento: {{ dadosDetalhamento.dataLancamento | date: 'dd/MM/yyyy' }}
+                </div>
+                <div class="row" *ngIf="dadosDetalhamento?.duracao">
+                    Duração: {{ dadosDetalhamento.duracao }}
+                </div>
+                <div class="row" *ngIf="dadosDetalhamento?.numeroEpisodios">
+                    Número episódios: {{ dadosDetalhamento.numeroEpisodios }}
+                </div>
+                <div class="row" *ngIf="dadosDetalhamento?.numeroTemporadas">
+                    Número temporadas: {{ dadosDetalhamento.numeroTemporadas }}
+                </div>
+                <div class="row" *ngIf="dadosDetalhamento?.autor">
+                    Autor: {{ dadosDetalhamento.autor }}
+                </div>
+                <div class="row" *ngIf="dadosDetalhamento?.editora">
+                    Editora: {{ dadosDetalhamento.editora }}
+                </div>
+                <div class="row" *ngIf="dadosDetalhamento?.numeroPaginas">
+                    N° páginas: {{ dadosDetalhamento.numeroPaginas }}
+                </div>
+                <div class="row" *ngIf="dadosDetalhamento?.peso">
+                    Peso: {{ dadosDetalhamento.peso }} g
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-12 d-flex .margem-padrao avaliacao-div">
+            <div class="rating"> 
+                <input type="radio" name="rating" (click)="onAvaliar(5)" id="5">
+                <label for="5">☆</label> 
+                <input type="radio" name="rating" (click)="onAvaliar(4)" id="4">
+                <label for="4">☆</label> 
+                <input type="radio" name="rating" (click)="onAvaliar(3)" id="3">
+                <label for="3">☆</label> 
+                <input type="radio" name="rating" (click)="onAvaliar(2)" id="2">
+                <label for="2">☆</label> 
+                <input type="radio" name="rating" (click)="onAvaliar(1)" id="1">
+                <label for="1">☆</label>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="col-12">
+            <div class="row text-center vertical-center">
+                <img alt="xxx" class="estrela" src="../../../assets/images/stars/starfull.png">
+                <span class="nota-estrela">{{ dadosDetalhamento?.notaMidia > 0 ? dadosDetalhamento.notaMidia : '-' }}</span>
+            </div>
+
+            <div class="row sinopse-title">
+                Sinopse
+            </div>
+            <div class="row sinopse-desc" *ngIf="dadosDetalhamento?.descricao">
+                {{ dadosDetalhamento.descricao }}
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="col-12">
+            <div class="row sinopse-title">
+                Comentários
+            </div>
+            
+            <div class="row">
+                <div class="form-group margem-padrao col-11">
+                    <textarea class="form-control" placeholder="Faça seu comentário..." [(ngModel)]="comentario" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-center">
+                  <button class="btn btn-outline-success" (click)="onComentar()" [disabled]="!comentario || comentario.length < 3">Comentar</button>
+                </div>
+            </div>
+
+            <div class="margem-padrao mt-2 col-11" *ngIf="dadosDetalhamento?.comentarios">
+
+                <div class="row d-flex mt-2 comment-div" *ngFor="let comentario of dadosDetalhamento.comentarios">
+                    <div class="col-md-2 col-xl-2">
+                        <img alt="xxx" class="comment-image" src="../../../assets/images/user.svg">
+                    </div>
+                    <div class="col-9">
+                        <div class="row mt-2 comment-user-name">
+                            {{ comentario.userName ? comentario.userName : 'Anônimo'}}
+                        </div>
+                        <div class="row mt-3 comment-user">
+                            {{ comentario.comentario }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+
+    </div>
+    <br><br>
+</div>
