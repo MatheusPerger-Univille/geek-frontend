@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategoriasConfig } from 'src/app/core/configs/categorias.configs';
 
 @Component({
@@ -16,10 +17,15 @@ export class NavMenuComponent implements OnInit {
 
 	listCategoriasLivros = CategoriasConfig.LIVROS;
 
-    constructor() {
+    constructor(private router: Router) {
 	}
 
     ngOnInit(): void {
+	}
+
+	onPesquisaMidia(termo: string) {
+
+		this.router.navigate(['pesquisa', termo]);
 	}
 
 }

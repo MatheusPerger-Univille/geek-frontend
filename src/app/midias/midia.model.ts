@@ -12,10 +12,34 @@ export class Midia extends AbstractModel {
 
     public urlCapa: string;
 
-    // public arquivoImagem: File;
-
     public titulo: string;
 
     public categorias: Categoria[];
+
+    public avaliacoes: Avaliacao[];
+
+    public comentarios: Comentario[];
+
+    public notaMidia: number;
+
+}
+
+export class Avaliacao extends AbstractModel {
+
+    public userId: number;
+    public userName: string;
+    public nota: number;
+    public idMidia: number;
+    public tipoMidia: TipoMidia;
+
+}
+
+export class Comentario extends AbstractModel {
+
+    public userId: number;
+    public userName: string;
+    public comentario: string;
+    public idMidia: number;
+    public tipoMidia: TipoMidia;
 
 }

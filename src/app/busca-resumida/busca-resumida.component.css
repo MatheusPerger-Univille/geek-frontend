@@ -1,0 +1,89 @@
+.div-base {
+    background-color: #f2f2f2;
+}
+
+.div-container {
+    background-color: white;
+}
+
+.title {
+    font-family: Arial,Sans-Serif;
+    font-size: 2rem;
+    text-transform: uppercase;
+    padding: 1rem 0rem 1.5rem 0rem;
+    font-weight: bold;
+    color: #28a745;
+}
+
+.content-default {
+    width: 10.1875rem;
+}
+
+.content-default ~ .content-default {
+    margin: 0 0 0 1.25rem;
+}
+
+.content {
+    height: 18rem;
+    
+}
+
+.entity-card-simple {
+    position: relative;
+    min-width: 0;
+}
+
+.entity-card-simple .meta-title, .entity-card-simple .thumbnail {
+    margin-bottom: .1875rem;
+}
+
+.entity-card-simple .thumbnail {
+    overflow: hidden;
+    z-index: 1;
+}
+
+.thumbnail-container, .thumbnail-link {
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+a {
+    color: #2b2b2b;
+    text-decoration: none;
+    outline: none;
+    background: transparent;
+}
+
+.entity-card-simple .meta-description, .entity-card-simple .meta-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.entity-card-simple .meta-title {
+    display: block;
+    font-weight: 700;
+}
+
+.light {
+    color: #b3b3b3;
+}
+
+.thumbnail-img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+img {
+    vertical-align: middle;
+    border: 0;
+}
+
+.div-filmes, .div-series, .div-livros, .div-games{
+    border-bottom: 1px solid #28a745;
+    margin-bottom: 1rem;
+}
+

@@ -1,0 +1,113 @@
+<div class="div-base">
+    <div class="container div-container">
+
+        <div class="col-12 text-center mt-3" *ngIf="dados.filmes?.length == 0 && dados.games?.length == 0 && dados.series?.length == 0 && dados.livros?.length == 0">
+            Nenhum registro encontrado!
+        </div>
+        
+        <div class="col-12" *ngIf="dados.filmes?.length > 0">
+            <div class="row col-12 title div-filmes">
+                Filmes
+            </div>
+
+            <div class="row content">
+
+                <div class="content-default" *ngFor="let valor of dados?.filmes">
+                    <div class="entity-card-simple">
+                        <figure class="thumbnail">
+                            <a class="thumbnail-container thumbnail-link" [title]="valor?.titulo" [routerLink]="['../../midias/detalhamento', 'FILME', valor.id]">
+                                <img class="thumbnail-img" [src]="valor?.urlImagem ? valor.urlImagem : '../../../assets/images/posterdefault.jpg'" alt="valor?.titulo" width="150" height="200">
+                            </a>
+                        </figure>
+                        <div class="meta ">
+                            <a class="meta-title meta-title-link" [routerLink]="['../../midias/detalhamento', 'FILME', valor.id]" [title]="valor?.titulo">
+                                {{ valor?.titulo }}
+                            </a>
+                            <div class="meta-description light">{{ valor?.responsavel }}</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-12" *ngIf="dados.series?.length > 0">
+            <div class="row col-12 title div-series">
+                Séries
+            </div>
+
+            <div class="row content">
+
+                <div class="content-default" *ngFor="let valor of dados?.series">
+                    <div class="entity-card-simple">
+                        <figure class="thumbnail">
+                            <a class="thumbnail-container thumbnail-link" [title]="valor?.titulo" [routerLink]="['../../midias/detalhamento', 'SERIE', valor.id]">
+                                <img class="thumbnail-img" [src]="valor?.urlImagem ? valor.urlImagem : '../../../assets/images/posterdefault.jpg'" alt="valor?.titulo" width="150" height="200">
+                            </a>
+                        </figure>
+                        <div class="meta ">
+                            <a class="meta-title meta-title-link" [routerLink]="['../../midias/detalhamento', 'SERIE', valor.id]" [title]="valor?.titulo">
+                                {{ valor?.titulo }}
+                            </a>
+                            <div class="meta-description light">{{ valor?.responsavel }}</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-12" *ngIf="dados.livros?.length > 0">
+            <div class="row col-12 title div-livros">
+                Livros
+            </div>
+
+            <div class="row content">
+
+                <div class="content-default" *ngFor="let valor of dados?.livros">
+                    <div class="entity-card-simple">
+                        <figure class="thumbnail">
+                            <a class="thumbnail-container thumbnail-link" [title]="valor?.titulo" [routerLink]="['../../midias/detalhamento', 'LIVRO', valor.id]">
+                                <img class="thumbnail-img" [src]="valor?.urlImagem ? valor.urlImagem : '../../../assets/images/posterdefault.jpg'" alt="valor?.titulo" width="150" height="200">
+                            </a>
+                        </figure>
+                        <div class="meta ">
+                            <a class="meta-title meta-title-link" [routerLink]="['../../midias/detalhamento', 'LIVRO', valor.id]" [title]="valor?.titulo">
+                                {{ valor?.titulo }}
+                            </a>
+                            <div class="meta-description light">{{ valor?.responsavel }}</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-12" *ngIf="dados.games?.length > 0">
+            <div class="row col-12 title div-games">
+                Games
+            </div>
+
+            <div class="row content">
+
+                <div class="content-default" *ngFor="let valor of dados?.games">
+                    <div class="entity-card-simple">
+                        <figure class="thumbnail">
+                            <a class="thumbnail-container thumbnail-link" [title]="valor?.titulo" [routerLink]="['../../midias/detalhamento', 'GAME', valor.id]">
+                                <img class="thumbnail-img" [src]="valor?.urlImagem ? valor.urlImagem : '../../../assets/images/posterdefault.jpg'" alt="valor?.titulo" width="150" height="200">
+                            </a>
+                        </figure>
+                        <div class="meta ">
+                            <a class="meta-title meta-title-link" [routerLink]="['../../midias/detalhamento', 'GAME', valor.id]" [title]="valor?.titulo">
+                                {{ valor?.titulo }}
+                            </a>
+                            <div class="meta-description light">{{ valor?.responsavel }}</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
