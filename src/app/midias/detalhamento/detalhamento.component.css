@@ -1,0 +1,120 @@
+.div-base {
+    background-color: #f2f2f2;
+}
+
+.div-container {
+    background-color: white;
+}
+
+.imagem {
+    max-width: 25rem;
+    max-height: 25rem;
+}
+
+.title {
+    font-family: montserratSemiBold,Arial,Sans-Serif;
+    font-size: 2rem;
+    text-transform: uppercase;
+    padding: 1rem 0rem 1.5rem 0rem;
+    font-weight: bold;
+    color: #28a745;
+}
+
+.estrela {
+    max-width: 15%;
+}
+
+.nota-estrela {
+    font-size: 5rem;
+    font-weight: 500;
+    margin-left: 1rem;
+}
+
+.vertical-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sinopse-title {
+    margin-left: 1rem;
+    font-family: Arial,Sans-Serif;
+    font-size: 1.75rem;
+    padding: 1rem 0rem 1.5rem 0rem;
+    font-weight: bold;
+    color: #28a745;
+}
+
+.sinopse-desc {
+    margin-left: 1rem;
+    font-family: Arial,Sans-Serif;
+    font-size: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+}
+
+.margem-padrao {
+    margin-left: 1rem !important;
+}
+
+.comment-image {
+    width: 6rem;
+}
+
+.comment-user-name {
+    font-weight: bold;
+    font-size: 1.50rem;
+}
+
+.comment-user {
+    font-size: 1rem;
+}
+
+.comment-div {
+    border-bottom-color: black;
+    border-bottom: solid 1px;
+    padding: 1rem;
+}
+
+.avaliacao-div {
+    padding-bottom: 1rem;
+}
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label {
+    position: relative;
+    width: 1em;
+    font-size: 3.5rem;
+    color: #FFD600;
+    cursor: pointer
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4
+}

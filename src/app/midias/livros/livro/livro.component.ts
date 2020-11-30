@@ -125,8 +125,14 @@ export class LivroComponent extends AbstractComponentComponent implements OnInit
 		this.livrosService.salvar(this.livro)
 		.pipe(finalize(() => this.blockUI.stop()))
 		.subscribe(result => {
-			NotificationService.success(`Livro ${this.livro.titulo.toUpperCase()} salvo com sucesso.`);
-			this.irParaListagem();
+
+			if (this.imagemMidia) {
+				this.uploadImagem(result);
+			} else {
+				NotificationService.success(`Livro ${this.livro.titulo.toUpperCase()} salvo com sucesso.`);
+				this.irParaListagem();
+			}
+			
 		}, 
 			error => NotificationService.error(`Ocorreu uma falha ao tentar salvar o livro. ${error.error.message}`)
 		);
@@ -138,5 +144,22 @@ export class LivroComponent extends AbstractComponentComponent implements OnInit
 
 	irParaListagem() {
 	  	this.router.navigateByUrl('midias/livros');
+	}
+
+	private uploadImagem(idMidia: number) {
+
+		this.blockUI.update('Salvando imagem...');
+
+		const formData = new FormData();
+		formData.append('file', this.imagemMidia);
+		
+		this.livrosService.uploadImagem(formData, idMidia)
+			.pipe(finalize(() => this.blockUI.stop()))
+			.subscribe(r => {
+				NotificationService.success(`Livro ${this.livro.titulo.toUpperCase()} salvo com sucesso.`);
+				this.irParaListagem();
+			}, 
+				error => NotificationService.error(`Ocorreu uma falha ao tentar salvar a imagem do livro. ${error.error.message}`)
+			)
 	}
 }

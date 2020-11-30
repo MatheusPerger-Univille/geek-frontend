@@ -133,8 +133,14 @@ export class SerieComponent extends AbstractComponentComponent implements OnInit
 		this.seriesService.salvar(this.serie)
 			.pipe(finalize(() => this.blockUI.stop()))
 			.subscribe(result => {
-				NotificationService.success(`Série ${this.serie.titulo.toUpperCase()} salva com sucesso.`);
-				this.irParaListagem();
+
+				if (this.imagemMidia) {
+					this.uploadImagem(result);
+				} else {
+					NotificationService.success(`Série ${this.serie.titulo.toUpperCase()} salva com sucesso.`);
+					this.irParaListagem();
+				}
+
 			}, 
 				error => NotificationService.error(`Ocorreu uma falha ao tentar salvar a série. ${error.error.message}`)
 			);
@@ -146,5 +152,22 @@ export class SerieComponent extends AbstractComponentComponent implements OnInit
 
 	onVoltar() {
 		this.irParaListagem();
+	}
+
+	private uploadImagem(idMidia: number) {
+
+		this.blockUI.update('Salvando imagem...');
+
+		const formData = new FormData();
+		formData.append('file', this.imagemMidia);
+		
+		this.seriesService.uploadImagem(formData, idMidia)
+			.pipe(finalize(() => this.blockUI.stop()))
+			.subscribe(r => {
+				NotificationService.success(`Série ${this.serie.titulo.toUpperCase()} salva com sucesso.`);
+				this.irParaListagem();
+			}, 
+				error => NotificationService.error(`Ocorreu uma falha ao tentar salvar a imagem da série. ${error.error.message}`)
+			)
 	}
 }

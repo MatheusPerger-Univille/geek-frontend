@@ -32,13 +32,17 @@ export class SeriesService extends ServiceBase<Serie> {
     return this.httpClient.delete(`${this.API_PATH}/${value}`);
   }
     
-  salvar(value: Serie): Observable<any> {
+  salvar(value: Serie): Observable<number> {
 
     if (value.id) {
-      return this.httpClient.put(`${this.API_PATH}`, value);
+      return this.httpClient.put<number>(`${this.API_PATH}`, value);
     }
-    return this.httpClient.post(`${this.API_PATH}`, value);
+    return this.httpClient.post<number>(`${this.API_PATH}`, value);
   }
 
+  uploadImagem(form: FormData, idFilme: number): Observable<any> {
+
+    return this.httpClient.put(`${this.API_PATH}/upload/${idFilme}`, form);
+  }
 
 }

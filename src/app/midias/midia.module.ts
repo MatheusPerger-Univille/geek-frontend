@@ -3,10 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { MidiasComponent } from './midias.component';
 import { SharedModule } from '../core/components/shared/shared-module.module';
-import { LivrosComponent } from './livros/livros.component';
-import { InformacoesLivroComponent } from './livros/livro/informacoes-livro/informacoes-livro.component';
-import { LivroComponent } from './livros/livro/livro.component';
-import { GamesComponent } from './games/games.component';
 
 const ROUTES: Routes = [
   { path: '', component: MidiasComponent, pathMatch: 'full' },
@@ -26,6 +22,10 @@ const ROUTES: Routes = [
     path: 'games',
     loadChildren: () => import('./games/games.module').then(m => m.GamesModule)
   },
+  {
+    path: 'detalhamento',
+    loadChildren: () => import('./detalhamento/detalhamento.module').then(m => m.DetalhamentoModule)
+  }
   
 ];
 
