@@ -11,7 +11,10 @@
 					<input class="form-control mr-sm-2 input-search" type="search" [(ngModel)]="termo" placeholder="Pesquisa por título..." aria-label="Search">
 					<div class="input-group-append">
 							<button class="btn btn-outline-success header-button" type="button" (click)="onPesquisar()"><i class="fa fa-search"></i></button>
-							<button class="btn btn-outline-success header-button" type="button" (click)="onMidias()"><i class="fa fa-cog"></i></button>
+							<button class="btn btn-outline-success header-button" type="button" [hidden]="!this.usuarioService.isAdmin && !this.usuarioService.isRedator" (click)="onMidias()"><i class="fa fa-cog"></i></button>
+							<button class="btn btn-outline-success header-button" type="button" [hidden]="this.auth.loggedIn()" (click)="onLogin()"><i class="fa fa-user"></i></button>
+							<button class="btn btn-outline-success header-button" type="button" [hidden]="!this.auth.loggedIn()" (click)="onMeuCadastro()"><i class="fa fa-user"></i></button>
+							<button class="btn btn-outline-success header-button" type="button" [hidden]="!this.auth.loggedIn()" (click)="onLogout()"><i class="fa fa-sign-out"></i></button>
 					</div>
 				</div>
 			</div>

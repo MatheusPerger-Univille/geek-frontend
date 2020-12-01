@@ -44,10 +44,16 @@
                 <div class="row" *ngIf="dadosDetalhamento?.peso">
                     Peso: {{ dadosDetalhamento.peso }} g
                 </div>
+                <div class="row" *ngIf="dadosDetalhamento?.desenvolvedora">
+                    Desenvolvedor: {{ dadosDetalhamento.desenvolvedora }}
+                </div>
+                <div class="row" *ngIf="dadosDetalhamento?.opcaoOnline">
+                    Online: {{ dadosDetalhamento.opcaoOnline ? 'Sim' : 'Não' }}
+                </div>
                 
             </div>
         </div>
-        <div class="col-12 d-flex .margem-padrao avaliacao-div">
+        <div class="col-12 d-flex .margem-padrao avaliacao-div" *ngIf="isLogado">
             <div class="rating"> 
                 <input type="radio" name="rating" (click)="onAvaliar(5)" id="5">
                 <label for="5">☆</label> 
@@ -85,13 +91,13 @@
                 Comentários
             </div>
             
-            <div class="row">
+            <div class="row" *ngIf="isLogado">
                 <div class="form-group margem-padrao col-11">
                     <textarea class="form-control" placeholder="Faça seu comentário..." [(ngModel)]="comentario" rows="3"></textarea>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" *ngIf="isLogado">
                 <div class="col-12 text-center">
                   <button class="btn btn-outline-success" (click)="onComentar()" [disabled]="!comentario || comentario.length < 3">Comentar</button>
                 </div>
@@ -113,6 +119,12 @@
                     </div>
                 </div>
 
+            </div>
+
+            <div class="mt-2" *ngIf="dadosDetalhamento?.comentarios.length == 0">
+                <div class="row text-center">
+                    Nenhum comentário até o momento.
+                </div>
             </div>
             
         </div>

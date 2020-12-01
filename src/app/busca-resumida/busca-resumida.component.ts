@@ -31,14 +31,14 @@ export class BuscaResumidaComponent implements OnInit {
 
 		this.termo = this.route.snapshot.paramMap.get("termo");
 		this.tipo = TipoMidia[this.route.snapshot.paramMap.get("tipo")];
-		this.categoria = TipoMidia[this.route.snapshot.paramMap.get("categoria")];
+		this.categoria = +this.route.snapshot.paramMap.get("categoria");
 	}
 
 	ngOnInit(): void {
 
 		this.blockUI.start('Realizando busca...');
 
-		this.service.filtrar(this.termo, this.tipo, this.categoria)
+		this.service.filtrar(this.termo?.length > 0 ? this.termo : '', this.tipo, this.categoria > 0 ? this.categoria : undefined)
 			.pipe(finalize(() => this.blockUI.stop()))
 			.subscribe(
 				v => this.dados = v,

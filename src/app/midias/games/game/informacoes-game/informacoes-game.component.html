@@ -1,15 +1,15 @@
 <form class="form-linha" [formGroup]="formGroup">
     
     <mat-form-field class="example-full-width">
-        <mat-label>desenvolvedora</mat-label>
-        <input matInput formControlName="autor">
+        <mat-label>Desenvolvedora</mat-label>
+        <input matInput formControlName="desenvolvedora">
     </mat-form-field>
 
     <div class="row col-6">
         <mat-label>Online: </mat-label><br>
-        <mat-radio-group formControlName="opcaoOnline">
-            <mat-radio-button value="true">Sim</mat-radio-button><br>
-            <mat-radio-button value="false">Não</mat-radio-button>
+        <mat-radio-group formControlName="opcaoOnline" class="radio-group-form">
+            <mat-radio-button [value]="true">Sim</mat-radio-button>
+            <mat-radio-button [value]="false">Não</mat-radio-button>
         </mat-radio-group>
     </div>
 

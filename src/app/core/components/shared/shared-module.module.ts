@@ -20,6 +20,8 @@ import { PageTitleComponent } from './page-title/page-title.component';
 import { AbstractComponentComponent } from './abstract-component/abstract-component.component';
 import { DevTestesComponent } from './dev-testes/dev-testes.component';
 import {MatSelectModule} from '@angular/material/select';
+import { LoginComponent } from './login/login.component';
+import { CadastroComponent } from './login/cadastro/cadastro.component';
 
 const MODULES = [
   CommonModule,
@@ -47,7 +49,9 @@ const MODULES = [
     ViewImageModalComponent,
     PageTitleComponent,
     AbstractComponentComponent,
-    DevTestesComponent
+    DevTestesComponent,
+    LoginComponent,
+    CadastroComponent
   ],
   imports: [
     ...MODULES

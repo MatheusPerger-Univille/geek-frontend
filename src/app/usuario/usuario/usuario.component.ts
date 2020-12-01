@@ -26,10 +26,14 @@ export class UsuarioComponent implements OnInit {
 
 	permissaoEnum = Permissao;
 
+	get isUserPermissaoVoltar(): boolean {
+		return this.service.isAdmin;
+	}
+
 	constructor(private router: Router,
 		private route: ActivatedRoute,
 		private fb: FormBuilder,
-		private service: UsuarioService) {
+		public service: UsuarioService) {
 
 			this.id = this.route.snapshot.params['id'];
 		}
@@ -68,7 +72,12 @@ export class UsuarioComponent implements OnInit {
 	}
 
 	onVoltar() {
-		this.irParaListagem();
+		if (this.isUserPermissaoVoltar) {
+			this.irParaListagem();
+		} else {
+			this.router.navigateByUrl('');
+		}
+		
 	}
 
 	onSalvar() {
@@ -83,7 +92,7 @@ export class UsuarioComponent implements OnInit {
 			apelido: formValues.apelido,
 			uf: formValues.uf,
 			cidade: formValues.cidade,
-			permissao: formValues.permissao
+			permissao: this.isUserPermissaoVoltar ? formValues.permissao : Permissao.USUARIO
 		}
 
 		this.service.salvar(valuesSave)
@@ -92,7 +101,7 @@ export class UsuarioComponent implements OnInit {
 				NotificationService.success(`Usuário salvo com sucesso.`);
 				this.irParaListagem();
 			},
-				error => NotificationService.error(`Ocorreu uma falha ao tentar salvar o filme. ${error.error.message}`)
+				error => NotificationService.error(`Ocorreu uma falha ao tentar salvar o usuário. ${error.error.message}`)
 			);
 	}
 

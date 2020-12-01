@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { DevTestesComponent } from './core/components/shared/dev-testes/dev-testes.component';
 import { BuscaResumidaComponent } from './busca-resumida/busca-resumida.component';
+import { AuthGuard } from './core/guard/auth.guard';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   },
   {
     path: 'usuarios',
-    loadChildren: () => import('./usuario/usuario.module').then(m => m.UsuarioModule)
+    loadChildren: () => import('./usuario/usuario.module').then(m => m.UsuarioModule),
+    canActivate: [AuthGuard]
   }
 ];
 

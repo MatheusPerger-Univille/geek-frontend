@@ -22,16 +22,16 @@ import { Game } from './game/game.model';
 export class GamesComponent implements OnInit {
 
 	@BlockUI() 
-	  blockUI: NgBlockUI;
+	blockUI: NgBlockUI;
 	  
 	@ViewChild(DataTableDirective, { static: false })
-  dtElement: DataTableDirective;
+  	dtElement: DataTableDirective;
 
 	games: GamesPesquisa[];
 	paginacao: Paging;
 	dtOptions: any = {};
 	ordenacao = [[1, 'desc']];
-  nenhumRegistro = true;
+  	nenhumRegistro = true;
   
 	colunas = [
 		{ data: 'id', orderable: true },
@@ -40,16 +40,16 @@ export class GamesComponent implements OnInit {
 		{ data: '', orderable: false },
 	];
 
-  constructor(
-    private router: Router,
-		private pgService: PagingService,
-		private gamesService: GamesService
-  ) {}
+	constructor(
+		private router: Router,
+			private pgService: PagingService,
+			private gamesService: GamesService
+	) {}
 
-  ngOnInit(): void {
-	this.carregarDataTable();
+	ngOnInit(): void {
+		this.carregarDataTable();
 
-  }
+	}
 
 	carregarDataTable() {
 
@@ -133,6 +133,7 @@ export class GamesComponent implements OnInit {
 
 		this.gamesService.excluir(id).subscribe(r => {
 			NotificationService.success('Registro excluído com sucesso!');
+			this.reloadDataTable();
 			this.blockUI.stop();
 		}, error => {
 			NotificationService.error(`Algo deu errado durante a exclusão do registro`);

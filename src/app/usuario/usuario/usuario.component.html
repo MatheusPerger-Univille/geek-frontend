@@ -1,7 +1,7 @@
 <div class="container">
     <mat-card>
 
-        <app-page-title title="Usuário" subtitle="Cadastro de usuário" [showBackButton]="true" 
+        <app-page-title title="Usuário" subtitle="Cadastro de usuário" [showBackButton]="isUserPermissaoVoltar" 
           (onBackClicked)="onVoltar()"></app-page-title>
 
         <mat-card-content>
@@ -34,7 +34,7 @@
                     <mat-label>Cidade</mat-label>
                     <input matInput formControlName="cidade">
                 </mat-form-field>
-                <div class="row col-8">
+                <div class="row col-8" *ngIf="isUserPermissaoVoltar">
                     <mat-label>Permissão </mat-label>
                     <mat-radio-group formControlName="permissao" class="radio-group-form">
                         <mat-radio-button [value]="permissaoEnum.USUARIO">Usuário</mat-radio-button>

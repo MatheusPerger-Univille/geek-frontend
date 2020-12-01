@@ -12,7 +12,7 @@ import { PagingService } from './core/services/paging.service';
 import { DataUtils } from './core/utils/data-utils';
 import { NotificationService } from './core/components/shared/notification/notification.service';
 
-import * as $ from 'jquery';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NotificationPipe } from './core/components/shared/notification/notification-pipe';
 import { HeaderComponent } from './core/components/shared/header/header.component';
 import { HomeComponent } from './home/home.component';
@@ -22,6 +22,11 @@ import { registerLocaleData } from '@angular/common';
 import localePtBr from '@angular/common/locales/pt';
 import { NavMenuComponent } from './core/components/shared/nav-menu/nav-menu.component';
 import { BuscaResumidaComponent } from './busca-resumida/busca-resumida.component';
+import { AuthService } from './core/components/shared/login/auth.service';
+import { StorageService } from './core/services/storage.service';
+import { AuthInterceptor } from './core/interceptors/auth-interceptor';
+import { ErrorInterceptor, ErrorInterceptorProvider } from './core/interceptors/error-interceptor';
+import { AuthGuard } from './core/guard/auth.guard';
 
 registerLocaleData(localePtBr, 'pt');
 
@@ -52,7 +57,14 @@ registerLocaleData(localePtBr, 'pt');
     DataUtils,
     PagingService,
     NotificationService,
-    { provide: LOCALE_ID, useValue: 'pt-BR' }
+    AuthInterceptor,
+    AuthService,
+    AuthGuard,
+    StorageService,
+    ErrorInterceptorProvider,
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   exports: [
     NotificationPipe,
