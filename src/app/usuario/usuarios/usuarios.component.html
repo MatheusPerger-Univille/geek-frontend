@@ -1,0 +1,45 @@
+<div class="container">
+    <mat-card>
+
+      <app-page-title title="Usuários" subtitle="Listagem de usuários" [showBackButton]="false"></app-page-title>
+
+      <div class="card">
+        <div class="card-body">
+          
+          <table datatable class="table table-bordered hover datatable" [dtOptions]="dtOptions" style="width: 100%;">
+          
+            <thead>
+              <tr>
+                <th width="10%" class="text-center">ID</th>
+                <th width="60%" class="text-center">Nome</th>
+                <th width="20%" class="text-center">Permissão</th>
+                <th width="20%" class="text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="!nenhumRegistro">
+
+              <tr *ngFor="let usuario of usuarios; index as i">
+
+                <td class="text-left"> {{ usuario.id }}</td>
+                <td class="text-left"> {{ usuario.nome }} </td>
+                <td class="text-left"> {{ usuario.permissao}} </td>
+                <td class="text-center"> 
+                  <button type="button" class="btn btn-outline-success btn-sm button-action-table" (click)="onClickEditar(i)"><i class="fa fa-pencil"></i></button> 
+                  <button type="button" class="btn btn-outline-danger btn-sm button-action-table" (click)="onClickExcluir(i)"><i class="fa fa-trash"></i></button> 
+                </td>
+
+              </tr>
+            </tbody>
+            <tbody *ngIf="nenhumRegistro">
+              <tr>
+                <td colspan="4">Nenhum registro encontrado</td>
+              </tr>
+            <tbody>
+
+          </table>
+          
+        </div>
+      </div>
+
+    </mat-card>
+</div>

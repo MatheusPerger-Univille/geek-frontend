@@ -14,4 +14,5 @@ export class AppConfig {
     static TABLE_DOM_LENGTHMENU_SEARCH = '<"row"<"col-sm-6"l><"col-sm-6 pull-right"f>>rt<"row"<"col-sm-6"i><"col-sm-6 pull-right"p>>';
     static TABLE_DOM_PAGING = 'rt<"row"<"col-sm-6"i><"col-sm-6 pull-right"p>>';;
     static TABLE_DOM_EMPTY = 'rt';
+
 }

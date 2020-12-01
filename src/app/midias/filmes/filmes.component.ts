@@ -28,7 +28,7 @@ export class FilmesComponent implements OnInit {
 	filmes: FilmesPesquisa[];
 	paginacao: Paging;
 	dtOptions: any = {};
-	ordenacao = [[1, 'desc']];
+	ordenacao = [[0, 'desc']];
 	nenhumRegistro = true;
 
 	colunas = [

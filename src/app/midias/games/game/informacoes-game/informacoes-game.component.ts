@@ -45,12 +45,12 @@ export class InformacoesGameComponent implements OnInit {
 		
 		this.formGroup = this._formBuilder.group({
 			desenvolvedora: ['', Validators.required],
-			opcaoOnline: ['', Validators.required],
+			opcaoOnline: [false, Validators.required],
 		});
 
 		this.formGroup.valueChanges.pipe(
-		debounceTime(300),
-		distinctUntilChanged()
+			debounceTime(300),
+			distinctUntilChanged()
 		).subscribe(f => this.validarEmitir());
 	}
 

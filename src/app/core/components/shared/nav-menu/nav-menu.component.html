@@ -8,7 +8,7 @@
 
                 <ul>
                     <li *ngFor="let categoria of listCategoriasFilmes">
-                        <a [routerLink]="['filmes/categoria', categoria.id]">{{ categoria.descricao }}</a>
+                        <a (click)="onPesquisaCategoria('FILME', categoria.id)">{{ categoria.descricao }}</a>
                     </li>
                 </ul>
                 
@@ -18,7 +18,7 @@
 
                 <ul>
                     <li *ngFor="let categoria of listCategoriasGames">
-                        <a [routerLink]="['games/categoria', categoria.id]">{{ categoria.descricao }}</a>
+                        <a (click)="onPesquisaCategoria('GAME', categoria.id)">{{ categoria.descricao }}</a>
                     </li>
                 </ul>
 
@@ -28,7 +28,7 @@
 
                 <ul>
                     <li *ngFor="let categoria of listCategoriasLivros">
-                        <a [routerLink]="['livros/categoria', categoria.id]">{{ categoria.descricao }}</a>
+                        <a (click)="onPesquisaCategoria('LIVRO', categoria.id)">{{ categoria.descricao }}</a>
                     </li>
                 </ul>
 
@@ -38,7 +38,7 @@
 
                 <ul>
                     <li *ngFor="let categoria of listCategoriasSeries">
-                        <a [routerLink]="['series/categoria', categoria.id]">{{ categoria.descricao }}</a>
+                        <a (click)="onPesquisaCategoria('SERIE', categoria.id)">{{ categoria.descricao }}</a>
                     </li>
                 </ul>
 

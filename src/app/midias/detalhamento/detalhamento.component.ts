@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { finalize } from 'rxjs/operators';
+import { AuthService } from 'src/app/core/components/shared/login/auth.service';
 import { NotificationService } from 'src/app/core/components/shared/notification/notification.service';
 import { TipoMidia } from 'src/app/core/models/enums/tipo-midia.enum';
 import { FilmesService } from '../filmes/filmes.service';
+import { GamesService } from '../games/games.service';
 import { LivrosService } from '../livros/livros.service';
 import { Avaliacao, Comentario } from '../midia.model';
 import { SeriesService } from '../series/series.service';
@@ -29,14 +31,20 @@ export class DetalhamentoComponent implements OnInit {
 
 	comentario: string;
 
+	get isLogado(): boolean {
+		return this.auth.loggedIn();
+	}
+
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router,
 		private filmeService: FilmesService,
 		private serieService: SeriesService,
 		private livroService: LivrosService,
+		private gameService: GamesService,
 		private comentarioService: ComentarioService,
 		private avaliacaoService: AvaliacaoService,
+		private auth: AuthService
 	) {
 
 		this.id = +this.route.snapshot.paramMap.get("id");
@@ -70,7 +78,7 @@ export class DetalhamentoComponent implements OnInit {
 				service = this.livroService;
 				break;
 			case TipoMidia.GAME:
-				// TODO
+				service = this.gameService;
 				break;
 		
 			default:

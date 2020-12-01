@@ -1,5 +1,4 @@
-import { ViewChild } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
@@ -10,15 +9,15 @@ import { AppConfig } from 'src/app/core/configs/app.configs';
 import { EntityBase } from 'src/app/core/models/entity-base.model';
 import { Paging } from 'src/app/core/models/paging.model';
 import { PagingService } from 'src/app/core/services/paging.service';
-import { SeriesService } from '../../series/series.service';
-import { SeriesPesquisa } from './series-pesquisa.model';
+import { UsuarioService } from '../usuario.service';
+import { UsuarioPesquisa } from './usuario-pesquisa.model';
 
 @Component({
-  selector: 'app-series',
-  templateUrl: './series.component.html',
-  styleUrls: ['./series.component.css']
+  selector: 'app-usuarios',
+  templateUrl: './usuarios.component.html',
+  styleUrls: ['./usuarios.component.css']
 })
-export class SeriesComponent implements OnInit {
+export class UsuariosComponent implements OnInit {
 
 	@BlockUI() 
 	blockUI: NgBlockUI;
@@ -26,29 +25,30 @@ export class SeriesComponent implements OnInit {
 	@ViewChild(DataTableDirective, { static: false })
     dtElement: DataTableDirective;
 
-  	series: SeriesPesquisa[];
+	usuarios: UsuarioPesquisa[];
 	paginacao: Paging;
 	dtOptions: any = {};
 	ordenacao = [[0, 'desc']];
-  	nenhumRegistro = true;
+	nenhumRegistro = true;
 
 	colunas = [
 		{ data: 'id', orderable: true },
-		{ data: 'titulo', orderable: true },
-		{ data: 'dataLancamento', orderable: true },
+		{ data: 'nome', orderable: true },
+		{ data: 'permissao', orderable: false },
 		{ data: '', orderable: false },
-  	];
-  
-	constructor(
+	];
+
+    constructor(
 		private router: Router,
 		private pgService: PagingService,
-		private seriesService: SeriesService
+		private service: UsuarioService
 	) { }
 
-	ngOnInit(): void {
+    ngOnInit(): void {
+
 		this.carregarDataTable();
 	}
-
+	
 	carregarDataTable() {
 
 		this.dtOptions = {
@@ -62,16 +62,16 @@ export class SeriesComponent implements OnInit {
 
 				const p = this.paginacao ? this.paginacao : this.pgService.build(data, this.colunas);
 
-				const req: Observable<EntityBase<SeriesPesquisa>> = this.seriesService.filtrar(p);
+				const req: Observable<EntityBase<UsuarioPesquisa>> = this.service.filtrar(p);
 
 				req.pipe(
 					debounceTime(500),
 					distinctUntilChanged()
-				).subscribe((f: EntityBase<SeriesPesquisa>) => {
+				).subscribe((f: EntityBase<UsuarioPesquisa>) => {
 
-					this.series = f.content;
+					this.usuarios = f.content;
 
-					this.nenhumRegistro = this.series.length === 0;
+					this.nenhumRegistro = this.usuarios.length === 0;
 
 					callback({
 						rerecordsTotal: f.totalElements,
@@ -98,55 +98,55 @@ export class SeriesComponent implements OnInit {
 				]
 			}
 		};
-  	}
-  
+
+	}
+
 	botaoCriar() {
 		return {
 			text: `<i class="fa fa-plus"></i>`,
 			className: 'btn-outline-success',
 			key: { key: 'n', altKey: true },
 			action: () => {
-				this.router.navigateByUrl('midias/series/criar');
+				this.router.navigateByUrl('/usuarios/criar');
 			}
 		};
-  	}
-  
+	}
+
 	onClickEditar(index: number) {
 
-		const serie = this.series[index];
-		this.router.navigate(['midias/series/editar', serie.id]);
-  	}
-  
-  	onClickExcluir(index: number) {
+		const usuario = this.usuarios[index];
+		this.router.navigate(['usuarios/editar', usuario.id]);
+	}
 
-		const serie = this.series[index];
+	onClickExcluir(index: number) {
+
+		const usuario = this.usuarios[index];
 	
-		NotificationService.confirm(`Deseja continuar a exclusão de ${serie.titulo}?`, () => {
-			this.excluirRegistro(serie.id);
-		}, 
-			error => NotificationService.error(`Ocorreu um erro ao tentar excluir a série. ${error.error.message}`)
-		);
+		NotificationService.confirm(`Deseja continuar a exclusão de ${usuario.nome}?`, () => {
+			this.excluirRegistro(usuario.id);
+		}, error => {
+			NotificationService.error('Ocorreu um erro ao tentar excluir o usuario.');
+		});
 		
-  	}
-  
+	}
+
 	private reloadDataTable() {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
             dtInstance.ajax.reload();
         });
-  	}
+    }
 
-  
 	private excluirRegistro(id: number) {
-
 		this.blockUI.start();
 
-		this.seriesService.excluir(id)
+		this.service.excluir(id)
 			.pipe(finalize(() => this.blockUI.stop()))
 			.subscribe(r => {
 				NotificationService.success('Registro excluído com sucesso!');
 				this.reloadDataTable();
-			}, 
-				error => NotificationService.error(`Algo deu errado durante a exclusão do registro. ${error.error.message}`)
+			},
+				error => NotificationService.error(`Algo deu errado durante a exclusão do registro: ${error.error.message}.`)
 			);
 	}
+
 }

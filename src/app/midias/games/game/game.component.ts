@@ -116,13 +116,18 @@ export class GameComponent extends AbstractComponentComponent implements OnInit 
     onComplete() {
       this.blockUI.start();
   
-      this.gamesService.salvar(this.game).subscribe(result => {
-        NotificationService.success(`Filme ${this.game.titulo.toUpperCase()} salvo com sucesso.`);
-        this.blockUI.stop();
-        this.irParaListagem();
+      this.gamesService.salvar(this.game)
+      .pipe(finalize(() => this.blockUI.stop()))
+      .subscribe(result => {
+        if (this.imagemMidia) {
+					this.uploadImagem(result);
+				} else {
+					NotificationService.success(`Filme ${this.game.titulo.toUpperCase()} salvo com sucesso.`);
+					this.irParaListagem();
+        }
+        
       }, error => {
         NotificationService.error(`Ocorreu uma falha ao tentar salvar o game. ${error.error.message}`);
-        this.blockUI.stop();
       });
     }
     

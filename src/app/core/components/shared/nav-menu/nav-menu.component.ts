@@ -24,8 +24,13 @@ export class NavMenuComponent implements OnInit {
 	}
 
 	onPesquisaMidia(termo: string) {
+		this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => 
+			this.router.navigate(['pesquisa', termo]));
+	}
 
-		this.router.navigate(['pesquisa', termo]);
+	onPesquisaCategoria(tipo: string, idCategoria: number) {
+		this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => 
+			this.router.navigate(['pesquisa', tipo, idCategoria]));
 	}
 
 }
